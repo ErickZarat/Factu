@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include /partial/head %>
+	<title>Login</title>
+</head>
+<body>
+	<div class="container">
+    <div id="login" class="z-depth-4 card-panel hoverable center grey lighten-4" style="margin: 12.2%;">
+        <form action="/login" method="post">
+            <div class="row">
+                <div class="input-field col s12 center">
+                    <img src="https://cdn1.iconfinder.com/data/icons/materia-human/24/013_003_account_profile_circle-512.png" style="height:150px; width:150px;" alt="" class="circle responsive-img valign profile-image-login">
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">account_circle</i>
+										<input id="txtUsername" type="text" class="validate">
+										<label for="txtUsername" style="text-align: left;">Usuario</label>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">lock</i>
+										<input id="txtPassword" type="password" class="validate">
+										<label for="txtPassword" style="text-align: left;">Password</label>
+                </div>
+            </div>
+              <input type="submit" value="Iniciar Sesión" class="btn btn-flat" style="width: 100%;">
+        </form>
+    </div>
+
+	</div>
+</body>
+</html>
