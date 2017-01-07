@@ -3,7 +3,7 @@ var ruta = require('express').Router(),
     usuario = require('./usuario.js'),
     cliente = require('./cliente.js'),
     configuracion = require('./configuracion.js'),
-    caja = require('./cajachica.js'),
+    cajachica = require('./cajachica.js'),
     producto = require('./producto'),
     factura = require('./factura'),
     estado = require('./estado.js'),
@@ -169,14 +169,138 @@ ruta.get('/estado/byid/:id', function(req, res){
 ///////////////////////////////// PRODUCTO //////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
+////// REGISTRO DE PRODUCTO ////////////
+ruta.post('/producto', function(req, res){
+  var data = {
+    cod:req.body.cod,
+    producto:req.body.producto,
+    estado:req.body.estado,
+    agregado:req.body.agregado,
+    precio:req.body.precio,
+  }
+  producto.agregar(req, res, data, connection);
+});
+
+////////////// BUSQUEDA DE PRODUCTO //////////////////
+ruta.get('/producto/buscar/:prod', function(req, res){
+  producto.buscar(req, res, req.params.prod, connection);
+});
+
+ruta.get('/producto/:id', function(req, res){
+  producto.obtenerId(req, res, req.params.id, connection);
+});
+
+ruta.get('/producto/', function(req, res){
+  producto.obtener(req, res, connection);
+});
+
+////////////// ELIMINAR PRODUCTO /////////////////////
+ruta.delete('/producto', function(req, res){
+  producto.eliminar(req, res, req.body.id, connection);
+});
+
+////////////// MODIFICAR PRODUCTO /////////////////////
+ruta.put('/producto/', function(req, res){
+  var data = {
+    id:req.body.id,
+    cod:req.body.cod,
+    producto:req.body.producto,
+    estado:req.body.estado,
+    agregado:req.body.agregado,
+    precio:req.body.precio,
+  }
+  producto.modificar(req, res, data, connection);
+});
+
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// FACTURA ///////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
+////// REGISTRO DE FACTURA ////////////
+ruta.post('/factura', function(req, res){
+  var data = {
+    fecha:req.body.fecha,
+    cliente:req.body.cliente,
+    vendedor: req.body.vendedor,
+    estado: req.body.estado,
+    total: req.body.total
+  }
+  factura.agregar(req, res, data, connection);
+});
+
+////////////// BUSQUEDA DE FACTURA //////////////////
+ruta.get('/factura/buscar/:desc', function(req, res){
+  factura.buscar(req, res, req.params.desc, connection);
+});
+
+ruta.get('/factura/:id', function(req, res){
+  factura.obtenerId(req, res, req.params.id, connection);
+});
+
+ruta.get('/factura/', function(req, res){
+  factura.obtener(req, res, connection);
+});
+
+////////////// ELIMINAR FACTURA /////////////////////
+ruta.delete('/factura', function(req, res){
+  factura.eliminar(req, res, req.body.id, connection);
+});
+
+////////////// MODIFICAR FACTURA /////////////////////
+ruta.put('/factura/', function(req, res){
+  var data = {
+    id:req.body.id,
+    fecha:req.body.fecha,
+    cliente:req.body.cliente,
+    vendedor: req.body.vendedor,
+    estado: req.body.estado,
+    total: req.body.total
+  }
+  factura.modificar(req, res, data, connection);
+});
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// CAJA CHICA ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
+////// REGISTRO DE CAJA CHICA ////////////
+ruta.post('/cajachica', function(req, res){
+  var data = {
+    desc:req.body.desc,
+    fecha:req.body.fecha,
+    gasto:req.body.gasto
+  }
+  cajachica.agregar(req, res, data, connection);
+});
 
+////////////// BUSQUEDA DE CAJA CHICA //////////////////
+ruta.get('/cajachica/buscar/:desc', function(req, res){
+  cajachica.buscar(req, res, req.params.desc, connection);
+});
+
+ruta.get('/cajachica/:id', function(req, res){
+  cajachica.obtenerId(req, res, req.params.id, connection);
+});
+
+ruta.get('/cajachica/', function(req, res){
+  cajachica.obtener(req, res, connection);
+});
+
+////////////// ELIMINAR CAJA CHICA /////////////////////
+ruta.delete('/cajachica', function(req, res){
+  cajachica.eliminar(req, res, req.body.id, connection);
+});
+
+////////////// MODIFICAR CAJA CHICA /////////////////////
+ruta.put('/cajachica/', function(req, res){
+  var data = {
+    desc:req.body.desc,
+    fecha:req.body.fecha,
+    gasto:req.body.gasto,
+    id: req.body.id
+  }
+  cajachica.modificar(req, res, data, connection);
+});
 
 
 /////////////////////////////////////////////////////////////////////////////////////

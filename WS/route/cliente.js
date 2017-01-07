@@ -23,7 +23,7 @@ var cliente = {
     ///////////////// BUSQUEDA CLIENTE ///////////////////////////////////////////
     buscar: function(req, res, nombre, connection){
       if (connection) {
-        connection.query('SELECT * FROM factu.cliente where nombre like ?;',['%'+nombre+'%'],
+        connection.query('SELECT c.id, c.nit, c.nombre, c.telefono, c.direccion, c.estado AS idEstado, e.desc AS estado, c.agregado FROM cliente c, estado e where nombre like ? AND  e.id=c.estado;',['%'+nombre+'%'],
         function(error, resultado){
           if(error){
             res.json({"msg":"Error al buscar"});
@@ -55,7 +55,7 @@ var cliente = {
     ///////////////// OBTENER TODO CLIENTE ///////////////////////////////////
     obtener: function(req, res, connection){
       if (connection) {
-        connection.query('SELECT * FROM cliente;',
+        connection.query('SELECT c.id, c.nit, c.nombre, c.telefono, c.direccion, c.estado AS idEstado, e.desc AS estado, c.agregado FROM cliente c, estado e WHERE c.estado=e.id;',
         function(error, resultado){
           if(error){
             res.json({"msg":"Error al obtener"});
@@ -71,7 +71,7 @@ var cliente = {
     ///////////////// OBTENER POR ID CLIENTE ///////////////////////////////////
     obtenerId: function(req, res, id, connection){
       if (connection) {
-        connection.query('SELECT * FROM cliente WHERE id=?;',id,
+        connection.query('SELECT c.id, c.nit, c.nombre, c.telefono, c.direccion, c.estado AS idEstado, e.desc AS estado, c.agregado FROM cliente c, estado e WHERE c.estado=e.id AND c.id=?;',id,
         function(error, resultado){
           if(error){
             res.json({"msg":"Error al obtener"});

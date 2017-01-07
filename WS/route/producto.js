@@ -21,12 +21,12 @@ var producto = {
     /////////////////////////////////////////////////////////////////////////////
 
     ///////////////// BUSQUEDA PRODUCTO ///////////////////////////////////////////
-    buscar: function(req, res, nombre, connection){
+    buscar: function(req, res, data, connection){
       if (connection) {
-        connection.query('SELECT * FROM factu.producto where nombre like ?;',['%'+nombre+'%'],
+        connection.query('SELECT p.id, p.cod, p.producto, p.estado AS idEstado, e.desc AS estado, p.agregado, p.precio FROM producto p, estado e where (cod like ? OR p.producto like ?) AND e.id =p.estado;',['%'+data+'%', '%'+data+'%'],
         function(error, resultado){
           if(error){
-            res.json({"msg":"Error al buscar"});
+            res.json({"msg":"Error al buscar"+error});
           }else {
             if (typeof resultado == undefined || typeof resultado == 'undefined' ) { res.json({"msg":"No hay productos"}); }
             else{ res.json(resultado); }
@@ -55,7 +55,7 @@ var producto = {
     ///////////////// OBTENER TODO PRODUCTO ///////////////////////////////////
     obtener: function(req, res, connection){
       if (connection) {
-        connection.query('SELECT * FROM producto;',
+        connection.query('SELECT p.id, p.cod, p.producto, p.estado AS idEstado, e.desc AS estado, p.agregado, p.precio FROM producto p, estado e WHERE e.id=p.estado;',
         function(error, resultado){
           if(error){
             res.json({"msg":"Error al obtener"});
@@ -71,7 +71,7 @@ var producto = {
     ///////////////// OBTENER POR ID PRODUCTO ///////////////////////////////////
     obtenerId: function(req, res, id, connection){
       if (connection) {
-        connection.query('SELECT * FROM producto WHERE id=?;',id,
+        connection.query('SELECT p.id, p.cod, p.producto, p.estado AS idEstado, e.desc AS estado, p.agregado, p.precio FROM producto p, estado e WHERE p.id=? AND p.estado=e.id;',id,
         function(error, resultado){
           if(error){
             res.json({"msg":"Error al obtener"});
