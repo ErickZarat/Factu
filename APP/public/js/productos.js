@@ -32,9 +32,13 @@ function editar(id){
     success: function(data){
       $('#txtEdCod').val(data.cod);
       $('#txtEdName').val(data.producto);
-      $('#txtEdEstado').val(data.idEstado);
       $('#txtEdPrecio').val(data.precio);
       $('#txtEdAgregado').val(formatDateWS(data.agregado));
+      if(data.idEstado == '1'){
+        $('#chbEdEstado').prop('checked', true);
+      }else {
+        $('#chbEdEstado').prop('checked', false);
+      }
     },
     headers: {"x-access-token": window.localStorage.getItem('token')},
     error: function(){
@@ -44,11 +48,19 @@ function editar(id){
   });
 
   $('#btnModificar').click(function(){
+    var est = '';
+
+    if($('#chbEdEstado').is(':checked')){
+      est = '1'
+    }else {
+      est = '2';
+    }
+
     var prd = {
       id: id,
       cod: $('#txtEdCod').val(),
       producto: $('#txtEdName').val(),
-      estado: $('#txtEdEstado').val(),
+      estado: est,
       precio: $('#txtEdPrecio').val(),
       agregado: $('#txtEdAgregado').val()
     }
@@ -94,10 +106,19 @@ $(document).ready(function(){
   });
 
   $('#btnAgregar').click(function(){
+
+    var est = '';
+
+    if($('#chbEstado').is(':checked')){
+      est = '1'
+    }else {
+      est = '2';
+    }
+
     var prd = {
       cod: $('#txtCod').val(),
       producto: $('#txtName').val(),
-      estado: $('#txtEstado').val(),
+      estado: est,
       precio: $('#txtPrecio').val(),
       agregado: getCurrentDate()
     }
@@ -114,7 +135,7 @@ $(document).ready(function(){
       },
       type: 'POST'
     });
-    });
+  });
 
   $('#txtSearch').bind('input',function(){
     $('#progressBar').show();

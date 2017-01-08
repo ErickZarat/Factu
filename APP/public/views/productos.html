@@ -53,83 +53,93 @@
 
   <!--  MODALS  -->
 
-<!-- NUEVO PRODUCTO -->
-<div id="mdlNuevo" class="modal">
-  <div class="modal-content">
+  <!-- NUEVO PRODUCTO -->
+  <div id="mdlNuevo" class="modal">
+    <div class="modal-content">
       <div class="valign">
         <h4>Nuevo Producto</h4>
         <div class="input-field margin-on-modal">
-						<input id="txtCod" type="text" class="validate" required>
-						<label for="txtCod" style="text-align: left;">Codigo</label>
-				</div>
+          <input id="txtCod" type="text" class="validate" required>
+          <label for="txtCod" style="text-align: left;">Codigo</label>
+        </div>
         <div class="input-field margin-on-modal">
-						<input id="txtName" type="text" class="validate" required>
-						<label for="txtName" style="text-align: left;">Nombre</label>
-				</div>
+          <input id="txtName" type="text" class="validate" required>
+          <label for="txtName" style="text-align: left;">Nombre</label>
+        </div>
         <div class="input-field margin-on-modal">
-						<input id="txtEstado" type="email" class="validate" required>
-						<label for="txtEstado" style="text-align: left;">Estado</label>
-				</div>
-				<div class="input-field margin-on-modal">
-						<input id="txtPrecio" type="text" class="validate" required>
-						<label for="txtPrecio" style="text-align: left;">Precio</label>
-				</div>
+          <input id="txtPrecio" type="text" class="validate" required>
+          <label for="txtPrecio" style="text-align: left;">Precio</label>
+        </div>
+
+        <div class="switch  margin-on-modal">
+          <label>
+            Inactivo
+            <input type="checkbox" id="chbEstado">
+            <span class="lever"></span>
+            Activo
+          </label>
+        </div>
       </div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnAgregar">Agregar</button>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+    </div>
   </div>
-  <div class="modal-footer">
-    <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnAgregar">Agregar</button>
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-  </div>
-</div>
 
 
-<!-- EDITAR Producto -->
-<div id="mdlEditar" class="modal">
-  <div class="modal-content">
+  <!-- EDITAR Producto -->
+  <div id="mdlEditar" class="modal">
+    <div class="modal-content">
       <div class="valign">
         <h4>Modificar Producto</h4>
         <input type="hidden" id="txtEdAgregado" value="">
         <div class="input-field margin-on-modal">
-						<input id="txtEdCod" type="text" class="validate" value=" ">
-						<label for="txtEdCod" style="text-align: left;">Codigo</label>
-				</div>
+          <input id="txtEdCod" type="text" class="validate" value=" ">
+          <label for="txtEdCod" style="text-align: left;">Codigo</label>
+        </div>
         <div class="input-field margin-on-modal">
-						<input id="txtEdName" type="text" class="validate" value=" ">
-						<label for="txtEdName" style="text-align: left;">Nombre</label>
-				</div>
+          <input id="txtEdName" type="text" class="validate" value=" ">
+          <label for="txtEdName" style="text-align: left;">Nombre</label>
+        </div>
         <div class="input-field margin-on-modal">
-						<input id="txtEdEstado" type="email" class="validate" value=" ">
-						<label for="txtEdEstado" style="text-align: left;">Estado</label>
-				</div>
-				<div class="input-field margin-on-modal">
-						<input id="txtEdPrecio" type="text" class="validate" value=" ">
-						<label for="txtEdPrecio" style="text-align: left;">Precio</label>
-				</div>
-      </div>
-  </div>
-  <div class="modal-footer">
-    <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnModificar">Modificar</button>
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-  </div>
-</div>
+          <input id="txtEdPrecio" type="text" class="validate" value=" ">
+          <label for="txtEdPrecio" style="text-align: left;">Precio</label>
+        </div>
+        <div class="switch margin-on-modal">
 
-<!-- ELIMINAR PRODUCTO -->
-<div id="mdlEliminar" class="modal">
-  <div class="modal-content">
+          <label>
+            Inactivo
+            <input type="checkbox" id="chbEdEstado">
+            <span class="lever"></span>
+            Activo
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnModificar">Modificar</button>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+    </div>
+  </div>
+
+  <!-- ELIMINAR PRODUCTO -->
+  <div id="mdlEliminar" class="modal">
+    <div class="modal-content">
       <div class="valign">
         <h4>Eliminar Producto</h4>
         <p>
           Esta seguro de que desea eliminar el Producto?
         </p>
       </div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnEliminar">Eliminar</button>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+    </div>
   </div>
-  <div class="modal-footer">
-    <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnEliminar">Eliminar</button>
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-  </div>
-</div>
 
   <% include /partial/footer %>
-<script src="./js/productos.js"></script>
+  <script src="./js/productos.js"></script>
 </body>
 </html>

@@ -34,8 +34,13 @@ function editar(id){
       $('#txtEdNit').val(data.nit);
       $('#txtEdTelefono').val(data.telefono);
       $('#txtEdDireccion').val(data.direccion);
-      $('#txtEdEstado').val(data.idEstado);
       $('#txtEdAgregado').val(formatDateWS(data.agregado));
+      if(data.idEstado == '1'){
+        $('#chbEdEstado').prop('checked', true);
+      }else {
+        $('#chbEdEstado').prop('checked', false);
+      }
+
     },
     headers: {"x-access-token": window.localStorage.getItem('token')},
     error: function(){
@@ -45,6 +50,14 @@ function editar(id){
   });
 
   $('#btnModificar').click(function(){
+    var est = '';
+
+    if($('#chbEdEstado').is(':checked')){
+      est = '1'
+    }else {
+      est = '2';
+    }
+
     var usr = {
       id: id,
       agregado: $('#txtEdAgregado').val(),
@@ -52,7 +65,7 @@ function editar(id){
       nit: $('#txtEdNit').val(),
       telefono: $('#txtEdTelefono').val(),
       direccion: $('#txtEdDireccion').val(),
-      estado: $('#txtEdEstado').val()
+      estado: est
     }
 
     $.ajax({
@@ -96,13 +109,21 @@ $(document).ready(function(){
   });
 
   $('#btnAgregar').click(function(){
+    var est = '';
+
+    if($('#chbEstado').is(':checked')){
+      est = '1'
+    }else {
+      est = '2';
+    }
+
     var usr = {
       nombre: $('#txtName').val(),
       nit: $('#txtNit').val(),
       agregado: getCurrentDate(),
       telefono: $('#txtTelefono').val(),
       direccion: $('#txtDireccion').val(),
-      estado: $('#txtEstado').val()
+      estado: est
     }
 
     $.ajax({

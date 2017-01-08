@@ -13,7 +13,20 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <!-- Import Materialize.min.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
 <script type="text/javascript">
+function formatDate(date){
+  var d = new Date(date);
+  console.log(date);
+  return  (d.getDate()) + '/' +(d.getMonth() + 1) + '/' + d.getFullYear();
+}
+
+function formatDateWS(date){
+  var d = new Date(date);
+  console.log(date);
+  return  d.getFullYear() + '/' +(d.getMonth() + 1) + '/' + (d.getDay() + 1) ;
+}
+
 function getCurrentDate(){
   var today = new Date();
 
@@ -30,7 +43,11 @@ function getCurrentDate(){
 var fecha = yyyy + '/' + mm + '/' + dd;
 console.log(fecha);
   return fecha;
-
 }
+
+$(document).ready(function(){
+  $(".button-collapse").sideNav();
+  $('.tooltipped').tooltip({delay: 50});
+  $('.modal').modal();
+});
 </script>
-<script src="../js/general.js"></script>
