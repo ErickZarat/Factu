@@ -4,87 +4,70 @@
 var express		  =	require('express');
 var session		  =	require('express-session');
 var bodyParser  = require('body-parser');
+var path  = require('path');
+var cors = require('cors');
 var app			    =	express();
 
 //setting ejs engine, for views
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/public/views');
 app.engine('html', require('ejs').renderFile);
+app.use(cors());
 
 //setting session params
 // SECRET: $h@k3Tr3nd
 app.use(session({secret: 'aa68852f213c0b7ddeccd80821e212ac',saveUninitialized: true,resave: true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 var usrSession;
 
+
 app.get('/',function(req,res){
-	usrSession=req.session;
-	if(usrSession.email)
-	{
-		res.redirect('/admin');
-	}
-	else{
-	res.render('index.html');
-	}
+	if(req.session.usr){ res.render('facturas.html'); }
+	else{ res.render('index.html'); }
 });
 
+
 app.get('/facturas', function(req, res){
-	res.render('facturas.html');
+	if(req.session.usr){ res.render('facturas.html'); }
+	else{ res.redirect('/'); }
 });
 
 app.get('/productos', function(req, res){
-	res.render('productos.html');
+	if(req.session.usr){ res.render('productos.html'); }
+	else{ res.redirect('/'); }
 });
 
 app.get('/clientes', function(req, res){
-	res.render('clientes.html');
+	if(req.session.usr){ res.render('clientes.html'); }
+	else{ res.redirect('/'); }
 });
 
 app.get('/usuarios', function(req, res){
-	res.render('usuarios.html');
+	if(req.session.usr){ res.render('usuarios.html'); }
+	else{ res.redirect('/'); }
 });
 
 app.get('/configuracion', function(req, res){
-	res.render('configuracion.html');
+	if(req.session.usr){ res.render('configuracion.html'); }
+	else{ res.redirect('/'); }
 });
 
-app.get('/salir', function(req, res){
-	res.render('index.html');
-});
-
-app.post('/login',function(req,res){
+app.post('/session',function(req,res){
 	usrSession=req.session;
+	usrSession.name=req.body.nombre;
+	usrSession.usr=req.body.username;
 	usrSession.email=req.body.email;
-	res.end('done');
+	res.redirect('/facturas');
 });
 
-app.get('/admin',function(req,res){
-	usrSession=req.session;
-	if(usrSession.email)
-	{
-		res.write('<h1>Hello '+usrSession.email+'</h1><br>');
-		res.end('<a href='+'/logout'+'>Logout</a>');
-	}
-	else
-	{
-		res.write('<h1>Please login first.</h1>');
-		res.end('<a href='+'/'+'>Login</a>');
-		res.redirect('/');
-	}
-
-});
 
 app.get('/logout',function(req,res){
 
 	req.session.destroy(function(err){
-		if(err){
-			console.log(err);
-		}
-		else
-		{
-			res.redirect('/');
-		}
+		if(err){ console.log(err); }
+		else { res.redirect('/'); }
 	});
 
 });
