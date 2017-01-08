@@ -23,7 +23,7 @@ var factura = {
     ///////////////// BUSQUEDA FACTURA ///////////////////////////////////////////
     buscar: function(req, res, data, connection){
       if (connection) {
-        connection.query('SELECT * FROM factura f, cliente c where (f.id=? OR c.nombre like ?) AND c.id=f.cliente ;',[data.id, '%'+data.nombre+'%'],
+        connection.query('SELECT f.id, f.cliente, c.nombre AS nombreCliente, c.telefono AS telCliente, f.vendedor, u.nombre AS nombreVendedor, f.estado, f.fecha, f.total FROM factura f, cliente c, usuario u where (f.id=? OR c.nombre like ?) AND c.id=f.cliente and u.id=f.vendedor ;',[data, '%'+data+'%'],
         function(error, resultado){
           if(error){
             res.json({"msg":"Error al buscar"});
@@ -55,7 +55,7 @@ var factura = {
     ///////////////// OBTENER TODO FACTURA ///////////////////////////////////
     obtener: function(req, res, connection){
       if (connection) {
-        connection.query('SELECT * FROM factura f, cliente c where f.cliente=c.id;',
+        connection.query('SELECT f.id, f.cliente, c.nombre AS nombreCliente, c.telefono AS telCliente, f.vendedor, u.nombre AS nombreVendedor, f.estado, f.fecha, f.total FROM factura f, cliente c, usuario u where f.cliente=c.id AND u.id=f.vendedor;',
         function(error, resultado){
           if(error){
             res.json({"msg":"Error al obtener"});
@@ -71,10 +71,10 @@ var factura = {
     ///////////////// OBTENER POR ID FACTURA ///////////////////////////////////
     obtenerId: function(req, res, id, connection){
       if (connection) {
-        connection.query('SELECT * FROM factura  f, cliente c where f.cliente=c.id AND id=?;',id,
+        connection.query('SELECT f.id, f.cliente, c.nombre AS nombreCliente, c.telefono AS telCliente, f.vendedor, u.nombre AS nombreVendedor, f.estado, f.fecha, f.total FROM factura f, cliente c, usuario u where f.cliente=c.id AND u.id=f.vendedor AND f.id=?;',id,
         function(error, resultado){
           if(error){
-            res.json({"msg":"Error al obtener"});
+            res.json({"msg":"Error al obtener"+error});
           }else {
             if (typeof resultado == undefined || typeof resultado == 'undefined' ) { res.json({"msg":"No existe el factura"}); }
             else{ res.json(resultado[0]); }
@@ -93,7 +93,7 @@ var factura = {
             res.json({"msg":"Factura no modificado" + error});
           }else {
             if (resultado.updateId > 0 || resultado !== 'undefined'){
-              res.json({"msg": "modificado correctamente"});
+              res.json({"msg": resultado});
             } else {
               res.json({"msg": "No se pudo modificar el factura"});
             }
