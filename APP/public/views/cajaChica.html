@@ -2,7 +2,7 @@
 <html>
 <head>
   <% include /partial/head %>
-  <title>Productos</title>
+  <title>Caja Chica</title>
 </head>
 <body>
   <% include /partial/header %>
@@ -20,7 +20,7 @@
         <div class="indeterminate"></div>
       </div>
       <div class="card-content black-text">
-        <span class="card-title"><strong>Productos</strong></span>
+        <span class="card-title"><strong>Caja Chica</strong></span>
         <div class="right">
           <div class="row">
             <div class="input-field col-s4">
@@ -35,15 +35,14 @@
         <table class="striped responsive-table">
           <thead>
             <tr>
-              <th>Codigo</th>
-              <th>Producto</th>
-              <th>Estado</th>
+              <th>ID</th>
+              <th>Descripcion</th>
               <th>Agregado</th>
-              <th>Precio</th>
+              <th>Gasto</th>
               <th>Acciones</th>
             </tr>
           </thead>
-          <tbody id="tblProductos">
+          <tbody id="tblRegistros">
 
           </tbody>
         </table>
@@ -53,26 +52,18 @@
 
   <!--  MODALS  -->
 
-<!-- NUEVO PRODUCTO -->
+<!-- NUEVO Registro -->
 <div id="mdlNuevo" class="modal">
   <div class="modal-content">
       <div class="valign">
-        <h4>Nuevo Producto</h4>
+        <h4>Nuevo Registro</h4>
         <div class="input-field margin-on-modal">
-						<input id="txtCod" type="text" class="validate" required>
-						<label for="txtCod" style="text-align: left;">Codigo</label>
+						<input id="txtDesc" type="text" class="validate" required>
+						<label for="txtDesc" style="text-align: left;">Descripcion</label>
 				</div>
         <div class="input-field margin-on-modal">
-						<input id="txtName" type="text" class="validate" required>
-						<label for="txtName" style="text-align: left;">Nombre</label>
-				</div>
-        <div class="input-field margin-on-modal">
-						<input id="txtEstado" type="email" class="validate" required>
-						<label for="txtEstado" style="text-align: left;">Estado</label>
-				</div>
-				<div class="input-field margin-on-modal">
-						<input id="txtPrecio" type="text" class="validate" required>
-						<label for="txtPrecio" style="text-align: left;">Precio</label>
+						<input id="txtGasto" type="text" class="validate" required>
+						<label for="txtGasto" style="text-align: left;">Gasto</label>
 				</div>
       </div>
   </div>
@@ -83,27 +74,19 @@
 </div>
 
 
-<!-- EDITAR Producto -->
+<!-- EDITAR Registro -->
 <div id="mdlEditar" class="modal">
   <div class="modal-content">
       <div class="valign">
-        <h4>Modificar Producto</h4>
+        <h4>Modificar Registro</h4>
         <input type="hidden" id="txtEdAgregado" value="">
         <div class="input-field margin-on-modal">
-						<input id="txtEdCod" type="text" class="validate" value=" ">
-						<label for="txtEdCod" style="text-align: left;">Codigo</label>
+						<input id="txtEdDesc" type="text" class="validate" value=" ">
+						<label for="txtEdDesc" style="text-align: left;">Descripcion</label>
 				</div>
         <div class="input-field margin-on-modal">
-						<input id="txtEdName" type="text" class="validate" value=" ">
-						<label for="txtEdName" style="text-align: left;">Nombre</label>
-				</div>
-        <div class="input-field margin-on-modal">
-						<input id="txtEdEstado" type="email" class="validate" value=" ">
-						<label for="txtEdEstado" style="text-align: left;">Estado</label>
-				</div>
-				<div class="input-field margin-on-modal">
-						<input id="txtEdPrecio" type="text" class="validate" value=" ">
-						<label for="txtEdPrecio" style="text-align: left;">Precio</label>
+						<input id="txtEdGasto" type="text" class="validate" value=" ">
+						<label for="txtEdGasto" style="text-align: left;">Gasto</label>
 				</div>
       </div>
   </div>
@@ -113,13 +96,13 @@
   </div>
 </div>
 
-<!-- ELIMINAR PRODUCTO -->
+<!-- ELIMINAR Registro -->
 <div id="mdlEliminar" class="modal">
   <div class="modal-content">
       <div class="valign">
-        <h4>Eliminar Producto</h4>
+        <h4>Eliminar Registro</h4>
         <p>
-          Esta seguro de que desea eliminar el Producto?
+          Esta seguro de que desea eliminar el Registro?
         </p>
       </div>
   </div>
@@ -130,6 +113,6 @@
 </div>
 
   <% include /partial/footer %>
-<script src="./js/productos.js"></script>
+<script src="../js/cajaChica.js"></script>
 </body>
 </html>

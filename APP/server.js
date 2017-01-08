@@ -54,6 +54,11 @@ app.get('/configuracion', function(req, res){
 	else{ res.redirect('/'); }
 });
 
+app.get('/cajachica', function(req, res){
+	if(req.session.usr){ res.render('cajaChica.html'); }
+	else{ res.redirect('/'); }
+});
+
 app.post('/session',function(req,res){
 	usrSession=req.session;
 	usrSession.name=req.body.nombre;
