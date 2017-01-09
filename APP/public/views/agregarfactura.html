@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include /partial/head %>
+  <title>Nueva Factura</title>
+</head>
+<body>
+  <% include /partial/header %>
+
+  <div class="container">
+    <div class="card hoverable valign grey lighten-4">
+      <div class="card-content">
+        <span class="card-title"><strong>Nueva Factura</strong></span>
+        <button type="button" class="btn right blue waves-effect light-waves" style="width: 40%;" id="btnSCliente"><i class="material-icons">search</i> Seleccionar Cliente</button>
+
+        <div class="row">
+          <div class="input-field col s4">
+            <input type="text" value=" " disabled id="txtName">
+            <label for="txtName">Nombre Cliente</label>
+          </div>
+          <div class="input-field col s4">
+            <input type="text" value=" " disabled id="txtNit">
+            <label for="txtNit">Nit Cliente</label>
+          </div>
+          <div class="input-field col s4">
+            <input type="text" value=" " disabled id="txtTelefono">
+            <label for="txtTelefono">Telefono</label>
+          </div>
+          <div class="input-field col s4">
+            <input type="text" value=" " disabled id="txtVendedor">
+            <label for="txtVendedor">Vendedor</label>
+          </div>
+          <div class="input-field col s4">
+            <input type="text" value=" " disabled id="txtFecha">
+            <label for="txtFecha">Fecha</label>
+          </div>
+          <div class="input-field col s4">
+            <select>
+              <option value="" disabled selected>Metodo de pago</option>
+              <option value="1">Efectivo</option>
+              <option value="2">Cheque</option>
+              <option value="3">Transferencia bancaria</option>
+              <option value="4">Credito</option>
+            </select>
+            <label>Pago</label>
+          </div>
+        </div>
+
+        <div class="card-action">
+          <a type="button" class="btn btn-flat waves-effect blue-waves" id="btnNProducto" href="#mdlNuevoProducto"><i class="material-icons">add</i> Nuevo producto</a>
+          <a type="button" class="btn btn-flat waves-effect blue-waves" id="btnNCliente" href="#mdlNuevoCliente"><i class="material-icons">face</i> Nuevo cliente</a>
+          <a type="button" class="btn btn-flat waves-effect blue-waves" id="btnSProducto" href="#mdlAgregarProducto"><i class="material-icons">search</i> Agregar productos</a>
+          <button type="button" class="btn btn-flat waves-effect blue-waves" id="btnImprimir"><i class="material-icons">print</i> Imprimir</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NUEVO cliente -->
+    <div id="mdlNuevoCliente" class="modal">
+      <div class="modal-content">
+          <div class="valign">
+            <h4>Nuevo Cliente</h4>
+            <div class="input-field margin-on-modal">
+    						<input id="txtCName" type="text" class="validate" required>
+    						<label for="txtCName" style="text-align: left;">Nombre</label>
+    				</div>
+            <div class="input-field margin-on-modal">
+    						<input id="txtCNit" type="text" class="validate" required>
+    						<label for="txtCNit" style="text-align: left;">Nit</label>
+    				</div>
+            <div class="input-field margin-on-modal">
+    						<input id="txtCTelefono" type="email" class="validate" required>
+    						<label for="txtCTelefono" style="text-align: left;">Telefono</label>
+    				</div>
+    				<div class="input-field margin-on-modal">
+    						<input id="txtCDireccion" type="text" class="validate" required>
+    						<label for="txtCDireccion" style="text-align: left;">Direccion</label>
+    				</div>
+            <div class="switch  margin-on-modal">
+              <label>
+                Inactivo
+                <input type="checkbox" id="chbCEstado">
+                <span class="lever"></span>
+                Activo
+              </label>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnAgregarCliente">Agregar</button>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+      </div>
+    </div>
+
+    <!-- NUEVO PRODUCTO -->
+    <div id="mdlNuevoProducto" class="modal">
+      <div class="modal-content">
+        <div class="valign">
+          <h4>Nuevo Producto</h4>
+          <div class="input-field margin-on-modal">
+            <input id="txtPCod" type="text" class="validate" required>
+            <label for="txtPCod" style="text-align: left;">Codigo</label>
+          </div>
+          <div class="input-field margin-on-modal">
+            <input id="txtPName" type="text" class="validate" required>
+            <label for="txtPName" style="text-align: left;">Nombre</label>
+          </div>
+          <div class="input-field margin-on-modal">
+            <input id="txtPPrecio" type="text" class="validate" required>
+            <label for="txtPPrecio" style="text-align: left;">Precio</label>
+          </div>
+
+          <div class="switch  margin-on-modal">
+            <label>
+              Inactivo
+              <input type="checkbox" id="chbPEstado">
+              <span class="lever"></span>
+              Activo
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnAgregarProducto">Agregar</button>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+      </div>
+    </div>
+
+  </div>
+
+  <% include /partial/footer %>
+  <script src="./js/agregarfactura.js"></script>
+</body>
+</html>

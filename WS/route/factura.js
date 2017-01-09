@@ -23,7 +23,7 @@ var factura = {
     ///////////////// BUSQUEDA FACTURA ///////////////////////////////////////////
     buscar: function(req, res, data, connection){
       if (connection) {
-        connection.query('SELECT f.id, f.cliente, c.nombre AS nombreCliente, c.telefono AS telCliente, f.vendedor, u.nombre AS nombreVendedor, f.estado, f.fecha, f.total FROM factura f, cliente c, usuario u where (f.id=? OR c.nombre like ?) AND c.id=f.cliente and u.id=f.vendedor ;',[data, '%'+data+'%'],
+        connection.query('SELECT f.id, f.cliente, c.nombre AS nombreCliente, c.telefono AS telCliente, f.vendedor, u.nombre AS nombreVendedor, f.estado AS idEdtado, e.desc AS estado, f.fecha, f.total FROM factura f, cliente c, usuario u, estado e where (f.id=? OR c.nombre like ?) AND c.id=f.cliente and u.id=f.vendedor and f.estado=e.id ;',[data, '%'+data+'%'],
         function(error, resultado){
           if(error){
             res.json({"msg":"Error al buscar"});
@@ -55,7 +55,7 @@ var factura = {
     ///////////////// OBTENER TODO FACTURA ///////////////////////////////////
     obtener: function(req, res, connection){
       if (connection) {
-        connection.query('SELECT f.id, f.cliente, c.nombre AS nombreCliente, c.telefono AS telCliente, f.vendedor, u.nombre AS nombreVendedor, f.estado, f.fecha, f.total FROM factura f, cliente c, usuario u where f.cliente=c.id AND u.id=f.vendedor;',
+        connection.query('SELECT f.id, f.cliente, c.nombre AS nombreCliente, c.telefono AS telCliente, f.vendedor, u.nombre AS nombreVendedor, f.estado AS idEstado, e.desc AS estado, f.fecha, f.total FROM factura f, cliente c, usuario u, estado e where f.cliente=c.id AND u.id=f.vendedor  and f.estado=e.id;',
         function(error, resultado){
           if(error){
             res.json({"msg":"Error al obtener"});
@@ -71,7 +71,7 @@ var factura = {
     ///////////////// OBTENER POR ID FACTURA ///////////////////////////////////
     obtenerId: function(req, res, id, connection){
       if (connection) {
-        connection.query('SELECT f.id, f.cliente, c.nombre AS nombreCliente, c.telefono AS telCliente, f.vendedor, u.nombre AS nombreVendedor, f.estado, f.fecha, f.total FROM factura f, cliente c, usuario u where f.cliente=c.id AND u.id=f.vendedor AND f.id=?;',id,
+        connection.query('SELECT f.id, f.cliente, c.nombre AS nombreCliente, c.telefono AS telCliente, f.vendedor, u.nombre AS nombreVendedor, f.estado AS idEstado, e.desc AS estado, f.fecha, f.total FROM factura f, cliente c, usuario u where f.cliente=c.id AND u.id=f.vendedor AND f.id=?  and f.estado=e.id;',id,
         function(error, resultado){
           if(error){
             res.json({"msg":"Error al obtener"+error});
@@ -93,9 +93,9 @@ var factura = {
             res.json({"msg":"Factura no modificado" + error});
           }else {
             if (resultado.updateId > 0 || resultado !== 'undefined'){
-              res.json({"msg": resultado});
+              res.json({"msg": "Modificado correctamente"});
             } else {
-              res.json({"msg": "No se pudo modificar el factura"});
+              res.json({"msg": "No se pudo modificar"});
             }
           }
         });

@@ -21,6 +21,8 @@ $(document).ready(function(){
        type: 'POST',
        success: function(data){
          window.localStorage.setItem('token', data.token);
+         window.localStorage.setItem('vendedorNombre', data.user.nombre);
+         window.localStorage.setItem('vendedorId', data.user.id);
          createSession(data.user);
        },
        error: function(){

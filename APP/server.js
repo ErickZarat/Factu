@@ -34,6 +34,11 @@ app.get('/facturas', function(req, res){
 	else{ res.redirect('/'); }
 });
 
+app.get('/agregarfactura', function(req, res){
+	if(req.session.usr){ res.render('agregarfactura.html'); }
+	else{ res.redirect('/'); }
+});
+
 app.get('/productos', function(req, res){
 	if(req.session.usr){ res.render('productos.html'); }
 	else{ res.redirect('/'); }
