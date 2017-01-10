@@ -89,7 +89,7 @@ function addRow(value){
 }
 
 $(document).ready(function(){
-  //Peticion de cliente
+  //Peticion de producto
   $.ajax({
     url: uri,
     headers: {"x-access-token": window.localStorage.getItem('token')},

@@ -11,9 +11,10 @@
     <div class="card hoverable valign grey lighten-4">
       <div class="card-content">
         <span class="card-title"><strong>Nueva Factura</strong></span>
-        <button type="button" class="btn right blue waves-effect light-waves" style="width: 40%;" id="btnSCliente"><i class="material-icons">search</i> Seleccionar Cliente</button>
+        <a class="btn right blue waves-effect light-waves" style="width: 40%;" id="btnSCliente" href="#mdlSeleccionarCliente"><i class="material-icons" >search</i> Seleccionar Cliente</a>
 
         <div class="row">
+          <input type="hidden" id="txtIdCliente">
           <div class="input-field col s4">
             <input type="text" value=" " disabled id="txtName">
             <label for="txtName">Nombre Cliente</label>
@@ -54,37 +55,55 @@
         </div>
       </div>
     </div>
+<div id="factPrint">
 
+
+    <div class="card hoverable valign grey lighten-4">
+      <div class="card-content">
+        <table class="striped table-responsive">
+          <thead>
+            <th>CODIGO</th>
+            <th>CANT.</th>
+            <th>DESCRIPCION</th>
+            <th>PRECIO UNIT.</th>
+            <th>PRECIO TOTAL</th>
+          </thead>
+          <tbody id="tblFactura"></tbody>
+        </table>
+
+      </div>
+    </div>
+</div>
     <!-- NUEVO cliente -->
     <div id="mdlNuevoCliente" class="modal">
       <div class="modal-content">
-          <div class="valign">
-            <h4>Nuevo Cliente</h4>
-            <div class="input-field margin-on-modal">
-    						<input id="txtCName" type="text" class="validate" required>
-    						<label for="txtCName" style="text-align: left;">Nombre</label>
-    				</div>
-            <div class="input-field margin-on-modal">
-    						<input id="txtCNit" type="text" class="validate" required>
-    						<label for="txtCNit" style="text-align: left;">Nit</label>
-    				</div>
-            <div class="input-field margin-on-modal">
-    						<input id="txtCTelefono" type="email" class="validate" required>
-    						<label for="txtCTelefono" style="text-align: left;">Telefono</label>
-    				</div>
-    				<div class="input-field margin-on-modal">
-    						<input id="txtCDireccion" type="text" class="validate" required>
-    						<label for="txtCDireccion" style="text-align: left;">Direccion</label>
-    				</div>
-            <div class="switch  margin-on-modal">
-              <label>
-                Inactivo
-                <input type="checkbox" id="chbCEstado">
-                <span class="lever"></span>
-                Activo
-              </label>
-            </div>
+        <div class="valign">
+          <h4>Nuevo Cliente</h4>
+          <div class="input-field margin-on-modal">
+            <input id="txtCName" type="text" class="validate" required>
+            <label for="txtCName" style="text-align: left;">Nombre</label>
           </div>
+          <div class="input-field margin-on-modal">
+            <input id="txtCNit" type="text" class="validate" required>
+            <label for="txtCNit" style="text-align: left;">Nit</label>
+          </div>
+          <div class="input-field margin-on-modal">
+            <input id="txtCTelefono" type="email" class="validate" required>
+            <label for="txtCTelefono" style="text-align: left;">Telefono</label>
+          </div>
+          <div class="input-field margin-on-modal">
+            <input id="txtCDireccion" type="text" class="validate" required>
+            <label for="txtCDireccion" style="text-align: left;">Direccion</label>
+          </div>
+          <div class="switch  margin-on-modal">
+            <label>
+              Inactivo
+              <input type="checkbox" id="chbCEstado">
+              <span class="lever"></span>
+              Activo
+            </label>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnAgregarCliente">Agregar</button>
@@ -126,8 +145,76 @@
       </div>
     </div>
 
-  </div>
+    <!-- Agregar PRODUCTO -->
+    <div id="mdlAgregarProducto" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <div class="valign">
+          <h4>Agregar Producto</h4>
+          <div class="right">
+              <div class="input-field">
+                <i class="material-icons prefix left">search</i>
+                <input type="text" id="txtSearchProducto" value="">
+                <label for="txtSearchProducto">Buscar</label>
+            </div>
+          </div>
+          <br/><br/>
+          <table class="striped responsive-table">
+            <thead>
+              <tr>
+                <th>Codigo</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Agregar</th>
+              </tr>
+            </thead>
+            <tbody id="tblProductos">
 
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cerrar</a>
+      </div>
+    </div>
+
+    <div class="modal modal-fixed-footer" id="mdlSeleccionarCliente">
+      <div class="modal-content">
+        <span class="card-title"><strong>Seleccionar Cliente</strong></span>
+        <div class="right">
+          <div class="row">
+            <div class="input-field col-s4">
+              <i class="material-icons prefix left">search</i>
+              <input type="text" id="txtSearchCliente" value="">
+              <label for="txtSearchCliente">Buscar</label>
+
+            </div>
+          </div>
+        </div>
+        <br/><br/>
+        <table class="striped responsive-table">
+          <thead>
+            <tr>
+              <th>Nombres</th>
+              <th>Nit</th>
+              <th>Telefono</th>
+              <th>Direccion</th>
+              <th>Seleccionar</th>
+            </tr>
+          </thead>
+          <tbody id="tblClientes">
+
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cerrar</a>
+      </div>
+    </div>
+
+
+  </div>
   <% include /partial/footer %>
   <script src="./js/agregarfactura.js"></script>
 </body>

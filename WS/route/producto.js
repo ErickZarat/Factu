@@ -11,7 +11,7 @@ var producto = {
           res.json({"msg":"Producto no agregado" + error});
         }else {
           if (resultado.insertId > 0){
-            res.json({"msg": "Agregado correctamente"});
+            res.json({"msg": "Agregado correctamente", "insertId": resultado.insertId});
           } else {
             res.json({"msg": "No se pudo agregar el producto"});
           }
