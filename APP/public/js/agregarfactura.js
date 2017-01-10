@@ -3,7 +3,8 @@ var server = 'http://localhost:3001/api/v1/',
     cliente: server + 'cliente',
     producto: server + 'producto',
     factura: server + 'factura',
-    config: server + 'configuracion'
+    config: server + 'configuracion',
+    prodfact: server + 'prodfact'
   }
 
   var listaProductos = new Array();
@@ -33,6 +34,7 @@ var server = 'http://localhost:3001/api/v1/',
 
   function AgregarAFactura(id){
     var prod = {
+      id: id,
       cod: $('#tdCod-'+id).text(),
       cant: $('#txtCant-'+id).val(),
       desc: $('#tdProd-'+id).text(),
@@ -94,7 +96,7 @@ $(document).ready(function(){
       estado: 3,
       total: $('#tdTotal').text()
     }
-
+    var facturaID = 0;
     console.log(fact);
     $.ajax({
       url: uri.factura,
@@ -103,11 +105,32 @@ $(document).ready(function(){
       data: fact,
       success: function(data){
         Materialize.toast(data.msg, 3000, 'rounded', function(){});
+        console.log(data.insertId);
+        ///////////
+        listaProductos.forEach(function(element, index, array){
+          var registro = {prod: element.id, fact:data.insertId, cant:element.cant};
+          $.ajax({
+            url: uri.prodfact,
+            headers: {"x-access-token": window.localStorage.getItem('token')},
+            type: 'POST',
+            data: registro,
+            success: function(result){
+              console.log(result.msg);
+              console.log(registro)
+              console.log('agregado el elemento '+ element.id);
+            }, error: function(){
+              alert('error en peticion');
+            }
+          });
+        });
+        Materialize.toast('Factura Agregada Exitosamente', 3000, 'token');
+        //////////////
       },
       error: function(){
-        alert('error en peticion')
+        alert('error en peticion');
       }
     });
+
   });
 
 /////////////////////////////////////////////////////////////////

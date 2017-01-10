@@ -16,28 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `estado`
+-- Table structure for table `prod_fact`
 --
 
-DROP TABLE IF EXISTS `estado`;
+DROP TABLE IF EXISTS `prod_fact`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `estado` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `desc` varchar(45) DEFAULT NULL,
-  `cat` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `prod_fact` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `prod` int(10) unsigned NOT NULL,
+  `fact` int(10) unsigned NOT NULL,
+  `cant` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `prod` (`prod`),
+  KEY `fact` (`fact`),
+  CONSTRAINT `prod_fact_ibfk_1` FOREIGN KEY (`prod`) REFERENCES `producto` (`id`),
+  CONSTRAINT `prod_fact_ibfk_2` FOREIGN KEY (`fact`) REFERENCES `factura` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `estado`
+-- Dumping data for table `prod_fact`
 --
 
-LOCK TABLES `estado` WRITE;
-/*!40000 ALTER TABLE `estado` DISABLE KEYS */;
-INSERT INTO `estado` VALUES (1,'Activo','ACT'),(2,'Inactivo','ACT'),(3,'Pagado','FAC'),(4,'No Pagado','FAC');
-/*!40000 ALTER TABLE `estado` ENABLE KEYS */;
+LOCK TABLES `prod_fact` WRITE;
+/*!40000 ALTER TABLE `prod_fact` DISABLE KEYS */;
+INSERT INTO `prod_fact` VALUES (1,3,15,1),(2,1,15,1),(3,3,15,1),(4,1,15,1);
+/*!40000 ALTER TABLE `prod_fact` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-08 21:42:57
+-- Dump completed on 2017-01-10 16:00:33

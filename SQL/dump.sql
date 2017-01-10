@@ -57,7 +57,7 @@ CREATE TABLE `cliente` (
   `estado` int(10) unsigned DEFAULT NULL,
   `agregado` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'817281-k','Mario Godoy','77889900','Ciudad',1,'2017-01-04'),(2,'443342','Jorge Carranza','2342342234','Ciudad',1,'2017-01-07'),(3,'423423423','Carlos Martinez','878797','Guatemala',2,'2017-01-07'),(4,'3423423','Maria Gonzalez','9089898089','Guatemala',1,'2017-01-07'),(5,'123123123','Orlando Cuevas','98978','Mixco',2,'2017-01-07'),(7,'8938201','Ximena Herrarte','9390320','Xela',2,'2017-01-07');
+INSERT INTO `cliente` VALUES (1,'817281-k','Mario Godoy','77889900','Ciudad',1,'2017-01-04'),(2,'443342','Jorge Carranza','2342342234','Ciudad',1,'2017-01-07'),(3,'423423423','Carlos Martinez','878797','Guatemala',2,'2017-01-07'),(4,'3423423','Maria Gonzalez','9089898089','Guatemala',1,'2017-01-07'),(5,'123123123','Orlando Cuevas','98978','Mixco',2,'2017-01-07'),(7,'8938201','Ximena Herrarte','9390320','Xela',2,'2017-01-07'),(8,'po','po','po','po',1,'2017-01-09'),(9,'m','m','m','m',1,'2017-01-09'),(10,'k','k','k','k',2,'2017-01-10'),(11,'h','h','h','h',2,'2017-01-10');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,12 +136,12 @@ DROP TABLE IF EXISTS `factura`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `factura` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `fecha` date DEFAULT NULL,
   `cliente` int(10) DEFAULT NULL,
   `vendedor` int(10) unsigned DEFAULT NULL,
   `estado` int(10) unsigned DEFAULT NULL,
-  `total` double DEFAULT NULL,
+  `total` double NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_factura_1_idx` (`vendedor`),
   KEY `fk_factura_2_idx` (`cliente`),
@@ -149,7 +149,7 @@ CREATE TABLE `factura` (
   CONSTRAINT `fk_factura_1` FOREIGN KEY (`vendedor`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_factura_2` FOREIGN KEY (`cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_factura_3` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +158,7 @@ CREATE TABLE `factura` (
 
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
-INSERT INTO `factura` VALUES (1,'2017-01-06',1,1,3,500),(4,'2017-01-08',2,2,3,1111);
+INSERT INTO `factura` VALUES (1,'2017-01-06',1,1,3,500),(4,'2017-01-08',2,2,3,1111),(5,'2017-01-10',2,1,3,88.36800000000001),(6,'2017-01-10',5,1,3,69.216),(7,'2017-01-10',9,1,3,616),(8,'2017-01-10',8,1,3,1403.416),(9,'2017-01-10',8,1,3,1463.784),(10,'2017-01-10',10,1,3,317.40799999999996),(11,'2017-01-10',3,1,3,159.04),(12,'2017-01-10',2,1,3,157.58399999999997),(13,'2017-01-10',2,1,3,207.648),(14,'2017-01-10',11,1,3,276.86400000000003),(15,'2017-01-10',3,1,3,138.432);
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,14 +171,15 @@ DROP TABLE IF EXISTS `prod_fact`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `prod_fact` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fact` int(11) DEFAULT NULL,
-  `prod` int(11) DEFAULT NULL,
+  `prod` int(10) unsigned NOT NULL,
+  `fact` int(10) unsigned NOT NULL,
+  `cant` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_prod_fact_1_idx` (`fact`),
-  KEY `fk_prod_fact_2_idx` (`prod`),
-  CONSTRAINT `fk_prod_fact_1` FOREIGN KEY (`fact`) REFERENCES `factura` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_prod_fact_2` FOREIGN KEY (`prod`) REFERENCES `productos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `prod` (`prod`),
+  KEY `fact` (`fact`),
+  CONSTRAINT `prod_fact_ibfk_1` FOREIGN KEY (`prod`) REFERENCES `producto` (`id`),
+  CONSTRAINT `prod_fact_ibfk_2` FOREIGN KEY (`fact`) REFERENCES `factura` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,6 +188,7 @@ CREATE TABLE `prod_fact` (
 
 LOCK TABLES `prod_fact` WRITE;
 /*!40000 ALTER TABLE `prod_fact` DISABLE KEYS */;
+INSERT INTO `prod_fact` VALUES (1,3,15,1),(2,1,15,1),(3,3,15,1),(4,1,15,1);
 /*!40000 ALTER TABLE `prod_fact` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +200,7 @@ DROP TABLE IF EXISTS `producto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `producto` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `cod` varchar(15) NOT NULL,
   `producto` varchar(100) DEFAULT NULL,
   `estado` int(10) unsigned DEFAULT NULL,
@@ -207,7 +209,7 @@ CREATE TABLE `producto` (
   PRIMARY KEY (`id`),
   KEY `fk_productos_1_idx` (`estado`),
   CONSTRAINT `fk_productos_1` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,7 +237,7 @@ CREATE TABLE `usuario` (
   `username` varchar(45) NOT NULL,
   `passwd` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -257,4 +259,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-08 21:43:59
+-- Dump completed on 2017-01-10 16:02:11

@@ -16,37 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `factura`
+-- Table structure for table `configuracion`
 --
 
-DROP TABLE IF EXISTS `factura`;
+DROP TABLE IF EXISTS `configuracion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `factura` (
+CREATE TABLE `configuracion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha` date DEFAULT NULL,
-  `cliente` int(10) DEFAULT NULL,
-  `vendedor` int(10) unsigned DEFAULT NULL,
-  `estado` int(10) unsigned DEFAULT NULL,
-  `total` double DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_factura_1_idx` (`vendedor`),
-  KEY `fk_factura_2_idx` (`cliente`),
-  KEY `fk_factura_3_idx` (`estado`),
-  CONSTRAINT `fk_factura_1` FOREIGN KEY (`vendedor`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_factura_2` FOREIGN KEY (`cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_factura_3` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `nombre` varchar(45) DEFAULT NULL,
+  `telefono` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `iva` double DEFAULT NULL,
+  `moneda` varchar(1) DEFAULT NULL,
+  `direccion` varchar(100) DEFAULT NULL,
+  `ciudad` varchar(100) DEFAULT NULL,
+  `region` varchar(100) DEFAULT NULL,
+  `codpostal` int(11) DEFAULT NULL,
+  `img` mediumtext CHARACTER SET ascii,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `factura`
+-- Dumping data for table `configuracion`
 --
 
-LOCK TABLES `factura` WRITE;
-/*!40000 ALTER TABLE `factura` DISABLE KEYS */;
-INSERT INTO `factura` VALUES (1,'2017-01-06',1,1,3,500),(4,'2017-01-08',2,2,3,1111);
-/*!40000 ALTER TABLE `factura` ENABLE KEYS */;
+LOCK TABLES `configuracion` WRITE;
+/*!40000 ALTER TABLE `configuracion` DISABLE KEYS */;
+INSERT INTO `configuracion` VALUES (1,'nombre 1','2332323232','correo@correo.com',12,'Q','Guatemala','Guatemala','Guatemala',10011,'');
+/*!40000 ALTER TABLE `configuracion` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-08 21:42:57
+-- Dump completed on 2017-01-10 16:00:33

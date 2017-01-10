@@ -7,12 +7,13 @@ var ruta = require('express').Router(),
     producto = require('./producto'),
     factura = require('./factura'),
     estado = require('./estado.js'),
+    prodfact = require('./prodfact'),
     mysql = require('mysql'),
     parametros = {
-    	host : 'localhost',
-    	user : 'root',
-    	password : 'admin',
-    	database : 'factu'
+    	host : 'sql9.freemysqlhosting.net',
+    	user : 'sql9153276',
+    	password : 'bu7IK7l4Af',
+    	database : 'sql9153276'
     }
 
 var connection = mysql.createConnection(parametros);
@@ -301,6 +302,30 @@ ruta.put('/cajachica/', function(req, res){
   }
   cajachica.modificar(req, res, data, connection);
 });
+
+/////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// ProdFact ///////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+
+////// REGISTRO DE PROD_FACT ////////////
+ruta.post('/prodfact', function(req, res){
+  var data = {
+    fact:req.body.fact,
+    prod:req.body.prod,
+    cant:req.body.cant
+  }
+  prodfact.agregar(req, res, data, connection);
+});
+
+ruta.get('/prodfact/:fac', function(req, res){
+  prodfact.obtenerFac(req, res, req.params.fac, connection);
+});
+
+////////////// ELIMINAR PROD_FACT /////////////////////
+ruta.delete('/prodfact', function(req, res){
+  prodfact.eliminar(req, res, req.body.id, connection);
+});
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////

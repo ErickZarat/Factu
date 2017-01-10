@@ -16,33 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `producto`
+-- Table structure for table `usuario`
 --
 
-DROP TABLE IF EXISTS `producto`;
+DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `producto` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cod` varchar(15) NOT NULL,
-  `producto` varchar(100) DEFAULT NULL,
-  `estado` int(10) unsigned DEFAULT NULL,
-  `agregado` date DEFAULT NULL,
-  `precio` double DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_productos_1_idx` (`estado`),
-  CONSTRAINT `fk_productos_1` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+CREATE TABLE `usuario` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `agregado` date NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `passwd` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `producto`
+-- Dumping data for table `usuario`
 --
 
-LOCK TABLES `producto` WRITE;
-/*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,'AKI','Memoria USB',1,'2017-01-06',35.5),(3,'LOP','Mouse Negro',2,'2017-01-06',26.3),(4,'QWE','IPOD',1,'2017-01-01',1200.45),(5,'PWT','Audifonos',2,'2017-01-01',150.6),(6,'LDN','Cable MicroUSB',1,'2017-01-01',50),(7,'QIM','Reloj',1,'2017-01-01',200);
-/*!40000 ALTER TABLE `producto` ENABLE KEYS */;
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'Erick Zarat','ezarat15@gmail.com','2017-01-04','admin','admin'),(2,'Jose Perez','jperez@gmail.com','2017-01-06','josse','jose'),(3,'Mario Garcia','mgarcia@gmail.com','2017-01-06','mario','mario'),(6,'Ana Cabrera','acabrera@hotmail.com','2017-01-06','ana','j'),(9,'Javier Vergara','javierv@gmail.com','2017-01-07','javier','m'),(10,'Karla Orellana','korellana@gmail.com','2017-01-07','karla','k');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-08 21:42:57
+-- Dump completed on 2017-01-10 16:00:33
