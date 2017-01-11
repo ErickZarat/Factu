@@ -78,6 +78,14 @@ $(document).ready(function(){
   $('#txtVendedor').val(window.localStorage.getItem('vendedorNombre'));
 
   $('#btnImprimir').click(function(){
+    if (typeof listaProductos[0] == 'undefined' && listaProductos[0] == null) {
+      alert('deber agregar productos a la factura para continuar');
+      return;
+    }
+    if($('#txtIdCliente').val() == "" || $('#txtIdCliente').val()=='undefined'){
+      alert('debe seleccionar un usuario para continuar');
+      return;
+    }
     var fact = {
       fecha: getCurrentDate(),
       cliente: $('#txtIdCliente').val(),

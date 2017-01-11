@@ -20,6 +20,10 @@ $(document).ready(function(){
       data: {username: $('#txtUsername').val(), passwd: $('#txtPassword').val()},
        type: 'POST',
        success: function(data){
+         if(data.msg !== undefined) {
+           Materialize.toast(data.msg + ', datos erroneos', 3000, 'rounded');
+           return;
+         }
          window.localStorage.setItem('token', data.token);
          window.localStorage.setItem('vendedorNombre', data.user.nombre);
          window.localStorage.setItem('vendedorId', data.user.id);
