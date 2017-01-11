@@ -4,9 +4,19 @@
 var express		  =	require('express');
 var session		  =	require('express-session');
 var bodyParser  = require('body-parser');
-var path  = require('path');
-var cors = require('cors');
+var path  			= require('path');
+var cors 				= require('cors');
+var multer      = require('multer');
 var app			    =	express();
+var storage =   multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, __dirname + '/public/uploads');
+  },
+  filename: function (req, file, callback) {
+    callback(null, 'fotoEmpresa');
+  }
+});
+var upload = multer({ storage : storage}).single('userPhoto');
 
 //setting ejs engine, for views
 app.set('views', __dirname + '/public/views');
@@ -26,6 +36,16 @@ var usrSession;
 app.get('/',function(req,res){
 	if(req.session.usr){ res.render('facturas.html'); }
 	else{ res.render('index.html'); }
+});
+
+app.post('/api/photo',function(req,res){
+    upload(req,res,function(err) {
+        if(err) {
+            return res.end("Error uploading file." + err);
+						res.redirect('/configuracion');
+        }
+        res.redirect('/configuracion');
+    });
 });
 
 

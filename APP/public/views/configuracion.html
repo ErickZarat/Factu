@@ -25,7 +25,7 @@
   <div class="container">
     <div class="card grey lighten-4 hoverable valign card-margin">
       <div class="card-image">
-        <img src="#" alt="Logo" id="imgLogo" />
+        <img src="../uploads/fotoEmpresa" alt="Logo" id="imgLogo" />
       </div>
       <div class="progress" id="progressBar">
         <div class="indeterminate"></div>
@@ -69,25 +69,34 @@
             <input type="text" id="txtCodPostal" value=" ">
             <label for="txtCodPostal">Codigo Postal</label>
           </div>
-          <div class="file-field input-field col s6">
-            <div class="btn blue waves-effect light-waves">
-              <span>Subir</span>
-              <input type="file" onchange="readURL(this);">
-            </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
-            </div>
-          </div>
+          <div class="col s6">
+            <form id        =  "uploadForm"
+            enctype   =  "multipart/form-data"
+            action    =  "/api/photo"
+            method    =  "post"
+            >
+            <div class="file-field input-field col s6">
+              <div class="btn blue waves-effect light-waves">
+                <span>Seleccionar</span>
+                <input type="file" onchange="readURL(this);" name="userPhoto">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div><br/>
+            <input type="submit" class="btn blue" value="Subir Imagen" name="submit">
+          </form>
         </div>
       </div>
-      <div class="card-action">
-        <button type="button" id="btnActualizar" class="btn blue waves-effect light-waves" name="button"><i class="material-icons">sync</i> Actualizar</button>
-      </div>
+    </div>
+    <div class="card-action">
+      <button type="button" id="btnActualizar" class="btn blue waves-effect light-waves" name="button"><i class="material-icons">sync</i> Actualizar</button>
     </div>
   </div>
+</div>
 
 
-  <% include /partial/footer %>
-  <script src="../js/configuracion.js" charset="utf-8"></script>
+<% include /partial/footer %>
+<script src="../js/configuracion.js" charset="utf-8"></script>
 </body>
 </html>
