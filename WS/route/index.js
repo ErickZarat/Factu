@@ -1,20 +1,20 @@
 
 var ruta = require('express').Router(),
-    usuario = require('./usuario.js'),
-    cliente = require('./cliente.js'),
-    configuracion = require('./configuracion.js'),
-    cajachica = require('./cajachica.js'),
-    producto = require('./producto'),
-    factura = require('./factura'),
-    estado = require('./estado.js'),
-    prodfact = require('./prodfact'),
-    mysql = require('mysql'),
-    parametros = {
-    	host : 'sql9.freemysqlhosting.net',
-    	user : 'sql9153276',
-    	password : 'bu7IK7l4Af',
-    	database : 'sql9153276'
-    }
+usuario = require('./usuario.js'),
+cliente = require('./cliente.js'),
+configuracion = require('./configuracion.js'),
+cajachica = require('./cajachica.js'),
+producto = require('./producto'),
+factura = require('./factura'),
+estado = require('./estado.js'),
+prodfact = require('./prodfact'),
+mysql = require('mysql'),
+parametros = {
+  host : 'localhost',
+  user : 'root',
+  password : 'admin',
+  database : 'factu'
+}
 
 var connection = mysql.createConnection(parametros);
 
@@ -243,6 +243,14 @@ ruta.get('/factura/', function(req, res){
   factura.obtener(req, res, connection);
 });
 
+ruta.post('/factura/fecha', function(req, res){
+  data={
+    inicial: req.body.inicial,
+    final: req.body.inicial
+  }
+  factura.obtenerPorFecha(req, res, data, connection);
+});
+
 ////////////// ELIMINAR FACTURA /////////////////////
 ruta.delete('/factura', function(req, res){
   factura.eliminar(req, res, req.body.id, connection);
@@ -277,6 +285,14 @@ ruta.post('/cajachica', function(req, res){
 ////////////// BUSQUEDA DE CAJA CHICA //////////////////
 ruta.get('/cajachica/buscar/:desc', function(req, res){
   cajachica.buscar(req, res, req.params.desc, connection);
+});
+
+ruta.post('/cajachica/fecha', function(req, res){
+  data={
+    inicial: req.body.inicial,
+    final: req.body.inicial
+  }
+  cajachica.obtenerPorFecha(req, res, data, connection);
 });
 
 ruta.get('/cajachica/:id', function(req, res){

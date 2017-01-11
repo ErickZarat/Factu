@@ -77,17 +77,6 @@ $(document).ready(function(){
   $('#txtFecha').val(formatDate(getCurrentDate()));
   $('#txtVendedor').val(window.localStorage.getItem('vendedorNombre'));
 
-  $('#btnImprimir').click(function() {
-     var printContents = document.getElementById('factPrint').innerHTML;
-     var originalContents = document.body.innerHTML;
-
-     document.body.innerHTML = printContents;
-
-     window.print();
-
-     document.body.innerHTML = originalContents;
-});
-
   $('#btnImprimir').click(function(){
     var fact = {
       fecha: getCurrentDate(),
@@ -118,6 +107,7 @@ $(document).ready(function(){
               console.log(result.msg);
               console.log(registro)
               console.log('agregado el elemento '+ element.id);
+              window.open('http://localhost:3000/generarfactura?facturaId='+data.insertId);
             }, error: function(){
               alert('error en peticion');
             }

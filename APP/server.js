@@ -34,8 +34,18 @@ app.get('/facturas', function(req, res){
 	else{ res.redirect('/'); }
 });
 
+app.get('/generarfactura', function(req, res){
+	if(req.session.usr){ res.render('facturagenerada.html'); }
+	else{ res.redirect('/'); }
+});
+
 app.get('/agregarfactura', function(req, res){
 	if(req.session.usr){ res.render('agregarfactura.html'); }
+	else{ res.redirect('/'); }
+});
+
+app.get('/caja', function(req, res){
+	if(req.session.usr){ res.render('caja.html'); }
 	else{ res.redirect('/'); }
 });
 

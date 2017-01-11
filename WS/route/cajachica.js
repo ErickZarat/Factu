@@ -36,6 +36,22 @@ var caja = {
     },
     /////////////////////////////////////////////////////////////////////////////
 
+    ///////////////// BUSQUEDA CAJA CHICA Fecha ////////////////////////////////////
+    obtenerPorFecha: function(req, res, data, connection){
+      if (connection) {
+        connection.query('SELECT * FROM caja_chica c WHERE c.fecha between ? and ?;',[data.inicial, data.final],
+        function(error, resultado){
+          if(error){
+            res.json({"msg":"Error al buscar"+error});
+          }else {
+            if (typeof resultado == undefined || typeof resultado == 'undefined' ) { res.json({"msg":"No hay facturas"}); }
+            else{ res.json(resultado); }
+          }
+        });
+      }
+    },
+    /////////////////////////////////////////////////////////////////////////////
+
     ///////////////// ELIMINAR CAJA ///////////////////////////////////////////
     eliminar: function(req, res, id, connection){
       if (connection) {

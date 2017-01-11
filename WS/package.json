@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "server.js",
   "scripts": {
-    "start": "xervo login"
+    "start": "supervisor server.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",

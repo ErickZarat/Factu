@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include /partial/head %>
+  <title>Caja</title>
+</head>
+<body>
+  <% include /partial/header %>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col s12">
+        <div class="card hoverable grey lighten-4">
+          <div class="row">
+            <div class="container">
+              <div class="col s4">
+                <div class="input-field">
+                  <input type="text" id="txtInicial" value="">
+                  <label for="txtInicial">Fecha Inicial</label>
+                </div>
+              </div>
+              <div class="col s4">
+                <div class="input-field">
+                  <input type="text" id="txtFinal" value="">
+                  <label for="txtFinal">Fecha Final</label>
+                </div>
+              </div>
+              <div class="col s4 valign-wrapper input-field">
+                <button type="button" class="btn blue waves-effect valign" id="btnGenerar">Generar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12">
+        <div class="card hoverable grey lighten-4 hid" id="cardCaja">
+          <span class="card-title"><strong>Caja</strong></span>
+          <table class="striped" id="tblCaja">
+            <thead>
+              <th>Descripcion</th>
+              <th>Total</th>
+            </thead>
+        <tbody id="tblCaja">
+
+        </tbody></table>
+        </div>
+      </div>
+      <div class="col s6">
+        <div class="card hoverable grey lighten-4 hid" id="cardIngresos">
+          <span class="card-title"><strong>Ingresos</strong></span>
+          <table class="striped" >
+            <thead>
+              <th>#</th>
+              <th>Vendedor</th>
+              <th>Total</th>
+            </thead>
+            <tbody id="tblIngresos">
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col s6">
+        <div class="card hoverable grey lighten-4 hid" id="cardEgresos">
+          <span class="card-title"><strong>Egresos</strong></span>
+          <table class="striped" >
+            <thead>
+              <th>#</th>
+              <th>Descripcion</th>
+              <th>Gasto</th>
+            </thead>
+            <tbody id="tblEgresos">
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <% include /partial/footer %>
+  <script src="./js/caja.js"></script>
+</body>
+</html>

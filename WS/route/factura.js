@@ -35,7 +35,22 @@ var factura = {
       }
     },
     /////////////////////////////////////////////////////////////////////////////
-
+    ///////////////// BUSQUEDA FACTURA FECHA///////////////////////////////////////////
+    obtenerPorFecha: function(req, res, data, connection){
+      console.log(data);
+      if (connection) {
+        connection.query('SELECT f.id, u.nombre AS nombreVendedor, f.fecha, f.total FROM factura f, usuario u where (f.fecha >= ? and f.fecha <= ?) AND u.id=f.vendedor;',[data.inicial, data.final],
+        function(error, resultado){
+          if(error){
+            res.json({"msg":"Error al buscar"});
+          }else {
+            if (typeof resultado == undefined || typeof resultado == 'undefined' ) { res.json({"msg":"No hay facturas"}); }
+            else{ res.json(resultado); }
+          }
+        });
+      }
+    },
+    /////////////////////////////////////////////////////////////////////////////
     ///////////////// ELIMINAR FACTURA ///////////////////////////////////////////
     eliminar: function(req, res, id, connection){
       if (connection) {
@@ -71,7 +86,7 @@ var factura = {
     ///////////////// OBTENER POR ID FACTURA ///////////////////////////////////
     obtenerId: function(req, res, id, connection){
       if (connection) {
-        connection.query('SELECT f.id, f.cliente, c.nombre AS nombreCliente, c.telefono AS telCliente, f.vendedor, u.nombre AS nombreVendedor, f.estado AS idEstado, e.desc AS estado, f.fecha, f.total FROM factura f, cliente c, usuario u where f.cliente=c.id AND u.id=f.vendedor AND f.id=?  and f.estado=e.id;',id,
+        connection.query('SELECT f.id, f.cliente, c.nombre AS nombreCliente, c.telefono AS telCliente, f.vendedor, u.nombre AS nombreVendedor, f.estado AS idEstado, e.desc AS estado, f.fecha, f.total FROM factura f, cliente c, usuario u, estado e where f.cliente=c.id AND u.id=f.vendedor AND f.id=?  and f.estado=e.id;',id,
         function(error, resultado){
           if(error){
             res.json({"msg":"Error al obtener"+error});
