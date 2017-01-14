@@ -10,11 +10,19 @@ estado = require('./estado.js'),
 prodfact = require('./prodfact'),
 mysql = require('mysql'),
 parametros = {
-  host : 'localhost',
-  user : 'root',
-  password : 'admin',
-  database : 'factu'
+  host : 'sql9.freemysqlhosting.net',
+  user : 'sql9153276',
+  password : 'bu7IK7l4Af',
+  database : 'sql9153276'
 }
+/*parametros = {
+host : 'localhost',
+user : 'root',
+password : 'admin',
+database : 'factu'
+}*/
+
+
 
 var connection = mysql.createConnection(parametros);
 
@@ -243,12 +251,17 @@ ruta.get('/factura/', function(req, res){
   factura.obtener(req, res, connection);
 });
 
-ruta.post('/factura/fecha', function(req, res){
+ruta.post('/factura-fecha/', function(req, res){
   data={
     inicial: req.body.inicial,
-    final: req.body.inicial
+    final: req.body.final
   }
   factura.obtenerPorFecha(req, res, data, connection);
+});
+
+/////////////// OBTENER ULTIMO ID /////////////////////
+ruta.get('/factura-index/', function(req, res){
+  factura.obtenerIndex(req, res, connection);
 });
 
 ////////////// ELIMINAR FACTURA /////////////////////
@@ -287,10 +300,10 @@ ruta.get('/cajachica/buscar/:desc', function(req, res){
   cajachica.buscar(req, res, req.params.desc, connection);
 });
 
-ruta.post('/cajachica/fecha', function(req, res){
+ruta.post('/cajachica-fecha/', function(req, res){
   data={
     inicial: req.body.inicial,
-    final: req.body.inicial
+    final: req.body.final
   }
   cajachica.obtenerPorFecha(req, res, data, connection);
 });

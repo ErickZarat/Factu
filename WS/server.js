@@ -5,7 +5,7 @@
     var mysql=require('mysql');
     var cors=require('cors');
 
-    var puerto=3001;
+    var puerto=process.env.PORT;
     var app=express();
     app.use(cors());
     app.use(bodyParser.urlencoded({

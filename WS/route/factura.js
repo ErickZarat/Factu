@@ -21,6 +21,22 @@ var factura = {
     /////////////////////////////////////////////////////////////////////////////
 
     ///////////////// BUSQUEDA FACTURA ///////////////////////////////////////////
+    obtenerIndex: function(req, res, connection){
+      if (connection) {
+        connection.query('SELECT (max(id)+1) as "index" from factura ;',[],
+        function(error, resultado){
+          if(error){
+            res.json({"msg":"Error al obtener el index" + error});
+          }else {
+            if (typeof resultado == undefined || typeof resultado == 'undefined' ) { res.json({"msg":"No existe index"}); }
+            else{ res.json(resultado[0]); }
+          }
+        });
+      }
+    },
+    /////////////////////////////////////////////////////////////////////////////
+
+    ///////////////// BUSQUEDA FACTURA ///////////////////////////////////////////
     buscar: function(req, res, data, connection){
       if (connection) {
         connection.query('SELECT f.id, f.cliente, c.nombre AS nombreCliente, c.telefono AS telCliente, f.vendedor, u.nombre AS nombreVendedor, f.estado AS idEdtado, e.desc AS estado, f.fecha, f.total FROM factura f, cliente c, usuario u, estado e where (f.id=? OR c.nombre like ?) AND c.id=f.cliente and u.id=f.vendedor and f.estado=e.id ;',[data, '%'+data+'%'],
@@ -89,7 +105,7 @@ var factura = {
         connection.query('SELECT f.id, f.cliente, c.nombre AS nombreCliente, c.telefono AS telCliente, f.vendedor, u.nombre AS nombreVendedor, f.estado AS idEstado, e.desc AS estado, f.fecha, f.total FROM factura f, cliente c, usuario u, estado e where f.cliente=c.id AND u.id=f.vendedor AND f.id=?  and f.estado=e.id;',id,
         function(error, resultado){
           if(error){
-            res.json({"msg":"Error al obtener"+error});
+            res.json({"msg":"Error al obtener "+error});
           }else {
             if (typeof resultado == undefined || typeof resultado == 'undefined' ) { res.json({"msg":"No existe el factura"}); }
             else{ res.json(resultado[0]); }
