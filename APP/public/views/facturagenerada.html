@@ -67,7 +67,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
 <script src="https://github.com/niklasvh/html2canvas/releases/download/0.5.0-alpha1/html2canvas.js" charset="utf-8"></script>
   <script type="text/javascript">
-  var server = 'http://localhost:3001/api/v1/'
+  var server = 'http://factuws-95180.app.xervo.io/api/v1/'
   var uri = {
     conf: server + 'configuracion',
     prodfact: server + 'prodfact',
@@ -90,6 +90,7 @@
      doc.save("fac-"+ getUrlParameter('facturaId') + ".pdf");
      form.width(cache_width);
     });
+
    }
 
    // create canvas object
@@ -176,8 +177,18 @@
           headers: {"x-access-token": window.localStorage.getItem('token')},
           success: function(data){
             actualizarTabla(data);
-            $('body').scrollTop(0);
-            createPDF();
+
+            if(getUrlParameter('print') !== 'TRUE'){
+              $('body').scrollTop(0);
+              createPDF();
+              window.setTimeout(function(){
+                self.close();
+              }, 2000);
+            } else {
+              window.print();
+              self.close();
+            }
+            
           }, error: function(){
             alert('error en peticion');
           }

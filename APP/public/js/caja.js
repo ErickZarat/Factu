@@ -1,4 +1,4 @@
-var server = 'http://localhost:3001/api/v1/'
+var server = 'http://factuws-95180.app.xervo.io/api/v1/'
 var uri = {
   cajachica: server + 'cajachica/',
   factura: server + 'factura/'
@@ -12,6 +12,10 @@ $(document).ready(function(){
   $('footer').hide();
   $('.hid').hide();
 
+  $('#btnImprimir').click(function(){
+    window.print();
+  });
+
   $('#btnGenerar').click(function(){
     $('#tblCaja tr').remove();
     $('#tblIngresos tr').remove();
@@ -21,8 +25,8 @@ $(document).ready(function(){
     total = 0;
 
     var fechasParams = {
-      inicial: new Date($('#txtInicial').val().split('/').reverse().join('.')),
-      final: new Date($('#txtFinal').val().split('/').reverse().join('.'))
+      inicial: new Date($('#txtInicial').val()),
+      final: new Date($('#txtFinal').val())
     }
     console.log(fechasParams);
     $.ajax({

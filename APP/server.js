@@ -111,6 +111,13 @@ app.get('/logout',function(req,res){
 	});
 
 });
-app.listen(3000,function(){
-	console.log("App Started on PORT 3000");
+
+///// DEVELOPMENT CONFIG
+app.listen(3000, function(){
+  console.log('Listen on port: 3000');
 });
+
+///// PRODUCTION CONFIG
+/*app.listen(process.env.PORT,function(){
+	console.log("App Started on PORT " + process.env.PORT);
+});*/

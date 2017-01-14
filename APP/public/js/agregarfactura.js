@@ -1,10 +1,13 @@
-var server = 'http://localhost:3001/api/v1/',
+var server = 'http://factuws-95180.app.xervo.io/api/v1/',
+//var server = 'http://localhost:3001/api/v1/'
+  appServer = 'http://localhost:3000/',
   uri = {
     cliente: server + 'cliente',
     producto: server + 'producto',
     factura: server + 'factura',
     config: server + 'configuracion',
-    prodfact: server + 'prodfact'
+    prodfact: server + 'prodfact',
+    generador: appServer + 'generarfactura?facturaId='
   }
 
   var listaProductos = new Array();
@@ -73,11 +76,7 @@ var server = 'http://localhost:3001/api/v1/',
     row = '';
   }
 
-$(document).ready(function(){
-  $('#txtFecha').val(formatDate(getCurrentDate()));
-  $('#txtVendedor').val(window.localStorage.getItem('vendedorNombre'));
-
-  $('#btnImprimir').click(function(){
+  function agregar(impr){
     if (typeof listaProductos[0] == 'undefined' && listaProductos[0] == null) {
       alert('deber agregar productos a la factura para continuar');
       return;
@@ -112,40 +111,44 @@ $(document).ready(function(){
             type: 'POST',
             data: registro,
             success: function(result){
-              console.log(result.msg);
-              console.log(registro)
-              console.log('agregado el elemento '+ element.id);
-              window.open('http://localhost:3000/generarfactura?facturaId='+data.insertId);
+              window.open(uri.generador+data.insertId+'&print='+impr);
+              window.location = '/';
             }, error: function(){
               alert('error en peticion');
             }
           });
         });
-        Materialize.toast('Factura Agregada Exitosamente', 3000, 'token');
         //////////////
       },
       error: function(){
         alert('error en peticion');
       }
     });
+  }
 
+$(document).ready(function(){
+  $('#txtFecha').val(formatDate(getCurrentDate()));
+  $('#txtVendedor').val(window.localStorage.getItem('vendedorNombre'));
+
+  $.ajax({
+    url: uri.factura + '-index/',
+    type: 'GET',
+    headers: {"x-access-token": window.localStorage.getItem('token')},
+    success: function(data){
+      $('#lblFacNum').text(' #'+data.index);
+    },
+    error:function(){
+      console.log('error en traer numero de factura');
+    }
   });
 
-/////////////////////////////////////////////////////////////////
-////////////////////// traer configuracion //////////////////////
-////////////////////////////////////////////////////////////////
-$.ajax({
-  url: uri.config,
-  headers: {"x-access-token": window.localStorage.getItem('token')},
-   type: 'GET',
-   success: function(data){
-     window.localStorage.setItem('config', JSON.stringify(data));
-   },
-   error: function(){
-     alert('error en peticion');
-   }
-});
+  $('#btnImprimir').click(function(){
+    agregar('TRUE');
+  });
 
+  $('#btnDescargar').click(function(){
+    agregar('FALSE');
+  });
 //////////////////////////////////////////////////////////////////
 /////////////////////  Agregar Cliente //////////////////////////
 /////////////////////////////////////////////////////////////////

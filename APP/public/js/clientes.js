@@ -1,4 +1,4 @@
-var uri = 'http://localhost:3001/api/v1/cliente';
+var uri = 'http://factuws-95180.app.xervo.io/api/v1/cliente';
 
 
 $('#progressBar').show();

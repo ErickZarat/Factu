@@ -1,10 +1,21 @@
+var apiServer = 'http://factuws-95180.app.xervo.io/api/v1/';
+//var server = 'http://factu-95214.app.xervo.io/';
+//var apiServer = 'http://localhost:3001/api/v1/';
+var appServer = 'http://localhost:3000/'
+var uri = {
+  factura: appServer + 'facturas',
+  session: appServer + 'session',
+  login: apiServer + 'login',
+  config: apiServer + 'configuracion'
+}
+
 function createSession(data){
   $.ajax({
-    url: 'http://localhost:3000/session',
+    url: uri.session,
     data: data,
      type: 'POST',
      success: function(data){
-       location.href = 'http://localhost:3000/facturas'
+       location.href = uri.factura
      },
      error: function(){
        alert('error en peticion');
@@ -13,10 +24,11 @@ function createSession(data){
 }
 
 $(document).ready(function(){
-  $("#login" ).submit(function( event ) {
 
+
+  $("#login" ).submit(function( event ) {
     $.ajax({
-      url: 'http://localhost:3001/api/v1/login',
+      url: uri.login,
       data: {username: $('#txtUsername').val(), passwd: $('#txtPassword').val()},
        type: 'POST',
        success: function(data){
@@ -27,6 +39,22 @@ $(document).ready(function(){
          window.localStorage.setItem('token', data.token);
          window.localStorage.setItem('vendedorNombre', data.user.nombre);
          window.localStorage.setItem('vendedorId', data.user.id);
+
+         /////////////////////////////////////////////////////////////////
+         ////////////////////// traer configuracion //////////////////////
+         ////////////////////////////////////////////////////////////////
+         $.ajax({
+           url: uri.config,
+           headers: {"x-access-token": window.localStorage.getItem('token')},
+            type: 'GET',
+            success: function(data){
+              window.localStorage.setItem('config', JSON.stringify(data));
+            },
+            error: function(){
+              alert('error en peticion');
+            }
+         });
+
          createSession(data.user);
        },
        error: function(){

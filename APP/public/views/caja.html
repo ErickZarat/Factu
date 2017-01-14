@@ -16,18 +16,19 @@
             <div class="container">
               <div class="col s4">
                 <div class="input-field">
-                  <input type="text" id="txtInicial" value="">
+                  <input type="date" class="datepicker" id="txtInicial" value="">
                   <label for="txtInicial">Fecha Inicial</label>
                 </div>
               </div>
               <div class="col s4">
                 <div class="input-field">
-                  <input type="text" id="txtFinal" value="">
+                  <input type="date" class="datepicker" id="txtFinal" value="">
                   <label for="txtFinal">Fecha Final</label>
                 </div>
               </div>
               <div class="col s4 valign-wrapper input-field">
                 <button type="button" class="btn blue waves-effect valign" id="btnGenerar">Generar</button>
+                <button type="button" class="btn blue waves-effect valign" id="btnImprimir">Imprimir</button>
               </div>
             </div>
           </div>
@@ -35,46 +36,52 @@
       </div>
       <div class="col s12">
         <div class="card hoverable grey lighten-4 hid" id="cardCaja">
-          <span class="card-title"><strong>Caja</strong></span>
-          <table class="striped" id="tblCaja">
-            <thead>
-              <th>Descripcion</th>
-              <th>Total</th>
-            </thead>
-        <tbody id="tblCaja">
-
-        </tbody></table>
+          <div class="container">
+            <span class="card-title"><strong>Caja</strong></span>
+            <table class="striped" id="tblCaja">
+              <thead>
+                <th>Descripcion</th>
+                <th>Total</th>
+              </thead>
+              <tbody id="tblCaja">
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       <div class="col s6">
         <div class="card hoverable grey lighten-4 hid" id="cardIngresos">
-          <span class="card-title"><strong>Ingresos</strong></span>
-          <table class="striped" >
-            <thead>
-              <th>#</th>
-              <th>Vendedor</th>
-              <th>Total</th>
-            </thead>
-            <tbody id="tblIngresos">
+          <div class="container">
+            <span class="card-title"><strong>Ingresos</strong></span>
+            <table class="striped" >
+              <thead>
+                <th>#</th>
+                <th>Vendedor</th>
+                <th>Total</th>
+              </thead>
+              <tbody id="tblIngresos">
 
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
       <div class="col s6">
         <div class="card hoverable grey lighten-4 hid" id="cardEgresos">
-          <span class="card-title"><strong>Egresos</strong></span>
-          <table class="striped" >
-            <thead>
-              <th>#</th>
-              <th>Descripcion</th>
-              <th>Gasto</th>
-            </thead>
-            <tbody id="tblEgresos">
+          <div class="container">
+            <span class="card-title"><strong>Egresos</strong></span>
+            <table class="striped" >
+              <thead>
+                <th>#</th>
+                <th>Descripcion</th>
+                <th>Gasto</th>
+              </thead>
+              <tbody id="tblEgresos">
 
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
