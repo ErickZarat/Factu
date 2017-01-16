@@ -1,5 +1,5 @@
 
-<footer class="page-footer blue" style="width: 100%; bottom: 0px;">
+<footer class="page-footer blue hide-print" style="width: 100%; bottom: 0px;">
   <div class="container">
     <div class="footer-copyright">
       <p class="center">
@@ -24,7 +24,7 @@ function formatDate(date){
 function formatDateWS(date){
   var d = new Date(date);
   console.log(date);
-  return  d.getFullYear() + '/' +(d.getMonth() + 1) + '/' + (d.getDay() + 1) ;
+  return  d.getFullYear() + '/' +(d.getMonth() + 1) + '/' + (d.getDate()) ;
 }
 
 function getCurrentDate(){
@@ -54,5 +54,17 @@ $(document).ready(function(){
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 15 // Creates a dropdown of 15 years to control year
   });
+
+  var rol = window.localStorage.getItem('rol');
+  if(rol !== 'ADMIN'){
+    $('.hid-bar').hide();
+    if(rol == 'ADMINISTRATIVO'){
+      $('.administrativo').show();
+    } else if(rol == 'OPERATIVO'){
+      $('.operativo').show();
+    } else if(rol == 'COMUN'){
+      $('.comun').show();
+    }
+  }
 });
 </script>

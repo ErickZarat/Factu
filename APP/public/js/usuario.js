@@ -120,7 +120,7 @@ function editar(id){
 }
 
 function addRow(value){
-  row = '<tr><td>'+value.id+'</td><td>'+value.nombre+'</td><td>'+value.username+'</td><td>'+value.email+'</td><td>'+formatDate(value.agregado)+'</td>'
+  row = '<tr><td>'+value.id+'</td><td>'+value.nombre+'</td><td>'+value.username+'</td><td>'+value.email+'</td><td>'+value.rolNombre+'</td><td>'+formatDate(value.agregado)+'</td>'
   + '<td><button class="btn-floating btn-flat tooltipped" data-position="bottom" data-delay="50" data-tooltip="Editar" onclick="editar('+value.id+')"><i class="material-icons blue-grey-text">edit</i></button>'
   + '<button class="btn-floating btn-flat tooltipped" data-position="bottom" data-delay="50" data-tooltip="Editar Contraseña" onclick="editarPass('+value.id+')"><i class="material-icons blue-grey-text">settings</i></button>'
   + '<button class="tooltipped btn-floating btn-flat" data-position="bottom" data-delay="50" data-tooltip="Eliminar" onclick="eliminar('+value.id+')"><i class="material-icons blue-grey-text">delete</i></button>' +'</td></tr>';

@@ -10,6 +10,7 @@ var uri = {
 }
 
 function createSession(data){
+  console.log(data);
   $.ajax({
     url: uri.session,
     data: data,
@@ -39,6 +40,8 @@ $(document).ready(function(){
          window.localStorage.setItem('token', data.token);
          window.localStorage.setItem('vendedorNombre', data.user.nombre);
          window.localStorage.setItem('vendedorId', data.user.id);
+         window.localStorage.setItem('rolId', data.user.rolId);
+         window.localStorage.setItem('rol', data.user.rolNombre);
 
          /////////////////////////////////////////////////////////////////
          ////////////////////// traer configuracion //////////////////////

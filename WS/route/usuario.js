@@ -7,7 +7,7 @@ var usr = {
   ///////////////// INICIO DE SESION ///////////////////////////////////////////
   login: function(req, res, usuario, connection){
     if (connection) {
-      connection.query('SELECT * FROM usuario WHERE username=? and passwd=?;', [usuario.username, usuario.passwd],
+      connection.query('SELECT u.id, u.nombre, u.email, u.agregado, u.username, u.passwd, u.rol rolId, r.nombre rolNombre, r.descripcion rolDesc FROM usuario u, rol r WHERE u.rol = r.id AND username=? and passwd=?;', [usuario.username, usuario.passwd],
       function(error, resultado){
         if(error){
           res.json({"msg":"Usuario y/o clave incorrecta"});
@@ -41,7 +41,7 @@ var usr = {
     ///////////////// BUSQUEDA USUARIO ///////////////////////////////////////////
     buscar: function(req, res, nombre, connection){
       if (connection) {
-        connection.query('SELECT * FROM usuario WHERE nombre LIKE ?;','%'+nombre+'%',
+        connection.query('SELECT u.id, u.nombre, u.email, u.agregado, u.username, u.passwd, u.rol rolId, r.nombre rolNombre, r.descripcion rolDesc FROM usuario u, rol r WHERE u.rol = r.id AND u.nombre LIKE ?;','%'+nombre+'%',
         function(error, resultado){
           if(error){
             res.json({"msg":"Error al buscar"});
@@ -73,7 +73,7 @@ var usr = {
     ///////////////// OBTENER TODO USUARIO ///////////////////////////////////
     obtener: function(req, res, connection){
       if (connection) {
-        connection.query('SELECT * FROM usuario;',
+        connection.query('SELECT u.id, u.nombre, u.email, u.agregado, u.username, u.passwd, u.rol rolId, r.nombre rolNombre, r.descripcion rolDesc FROM usuario u, rol r WHERE u.rol = r.id;',
         function(error, resultado){
           if(error){
             res.json({"msg":"Error al obtener"});
@@ -89,7 +89,7 @@ var usr = {
     ///////////////// OBTENER POR ID USUARIO ///////////////////////////////////
     obtenerId: function(req, res, id, connection){
       if (connection) {
-        connection.query('SELECT * FROM usuario WHERE id=?;',id,
+        connection.query('SELECT u.id, u.nombre, u.email, u.agregado, u.username, u.passwd, u.rol rolId, r.nombre rolNombre, r.descripcion rolDesc FROM usuario u, rol r WHERE u.rol = r.id and u.id=?;',id,
         function(error, resultado){
           if(error){
             res.json({"msg":"Error al obtener"});

@@ -32,9 +32,15 @@ function eliminar(id){
 
 
 function addRow(value){
-  row = '<tr><td>'+value.id+'</td><td>'+formatDate(value.fecha)+'</td><td>'+value.nombreCliente+'</td><td>'+value.nombreVendedor+'</td><td>'+value.estado+'</td><td>'+value.total+'</td>'
+  rol = window.localStorage.getItem('rol');
+  if(rol == 'ADMIN' || rol == 'ADMINISTRATIVO'){
+    eliminar = '<button class="tooltipped btn-floating btn-flat" data-position="bottom" data-delay="50" data-tooltip="Eliminar" onclick="eliminar('+value.id+')"><i class="material-icons blue-grey-text">delete</i></button>';
+  } else {
+    eliminar = '';
+  }
+  row = '<tr><td>'+value.id+'</td><td>'+formatDate(value.fecha)+'</td><td>'+value.nombreCliente+'</td><td>'+value.nombreVendedor+'</td><td>'+value.estado+'</td><td>'+value.total.toFixed(2)+'</td>'
   + '<td><button class="btn-floating btn-flat tooltipped" data-position="bottom" data-delay="50" data-tooltip="Descargar" onclick="descargar('+value.id+')"><i class="material-icons blue-grey-text">get_app</i></button>'
-  + '<button class="tooltipped btn-floating btn-flat" data-position="bottom" data-delay="50" data-tooltip="Eliminar" onclick="eliminar('+value.id+')"><i class="material-icons blue-grey-text">delete</i></button>' +'</td></tr>';
+  + eliminar +'</td></tr>';
   $('#tblFacturas').append(row);
   row = '';
 }

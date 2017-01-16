@@ -1,7 +1,7 @@
 var server = 'http://factuws-95180.app.xervo.io/api/v1/'
 var uri = {
-  cajachica: server + 'cajachica/',
-  factura: server + 'factura/'
+  cajachica: server + 'cajachica-fecha',
+  factura: server + 'factura-fecha'
 }
 
 var ingresos = 0;
@@ -13,7 +13,11 @@ $(document).ready(function(){
   $('.hid').hide();
 
   $('#btnImprimir').click(function(){
+    $(".car").toggleClass("s6 s12");
+    $('.hide-print').hide();
     window.print();
+    $(".car").toggleClass("s6 s12");
+    $('.hide-print').show();
   });
 
   $('#btnGenerar').click(function(){
@@ -25,45 +29,45 @@ $(document).ready(function(){
     total = 0;
 
     var fechasParams = {
-      inicial: new Date($('#txtInicial').val()),
-      final: new Date($('#txtFinal').val())
+      inicial: formatDateWS($('#txtInicial').val()),
+      final: formatDateWS($('#txtFinal').val())
     }
     console.log(fechasParams);
     $.ajax({
       url: uri.factura,
       headers: {"x-access-token": window.localStorage.getItem('token')},
-      type: 'GET',
+      type: 'POST',
+      data:fechasParams,
       success: function(data){
         $.each(data, function(i, value){
-          var fecha = new Date(value.fecha);
-          if(fecha >= fechasParams.inicial && fecha <= fechasParams.final){
-            ingresos += value.total;
-            var row = '<tr><td>'+value.id+'</td><td>'+value.nombreVendedor+'</td><td>'+value.total+'</td></tr>'
-            $('#tblIngresos').append(row);
+
+          ingresos += value.total;
+          var row = '<tr><td>'+value.id+'</td><td>'+value.nombreVendedor+'</td><td></td>'+value.fecha+'<td>'+value.total.toFixed(2)+'</td></tr>'
+          $('#tblIngresos').append(row);
+
+        });
+        $('#tblCaja').append('<tr><td>Facturas</td><td>'+ingresos.toFixed(2)+'</td></tr>');
+        $.ajax({
+          url: uri.cajachica,
+          headers: {"x-access-token": window.localStorage.getItem('token')},
+          type: 'POST',
+          data:fechasParams,
+          success: function(data){
+
+            $.each(data, function(i, value){
+
+                egresos += value.gasto;
+                var row = '<tr><td>'+value.id+'</td><td>'+value.desc+'</td><td>'+value.gasto.toFixed(2)+'</td></tr>'
+                $('#tblEgresos').append(row);
+
+            });
+
+            $('#tblCaja').append('<tr><td>Caja Chica</td><td>'+egresos.toFixed(2)+'</td></tr>');
+            $('#tblCaja').append('<tr><td>Total</td><td>'+(ingresos-egresos).toFixed(2)+'</td></tr>');
+
+          }, error: function(){
           }
         });
-        $('#tblCaja').append('<tr><td>Facturas</td><td>'+ingresos+'</td></tr>');
-      }, error: function(){
-      }
-    });
-    $.ajax({
-      url: uri.cajachica,
-      headers: {"x-access-token": window.localStorage.getItem('token')},
-      type: 'GET',
-      success: function(data){
-
-          $.each(data, function(i, value){
-            var fecha = new Date(value.fecha);
-            if(fecha <= fechasParams.inicial && fecha <= fechasParams.final){
-            egresos += value.gasto;
-            var row = '<tr><td>'+value.id+'</td><td>'+value.desc+'</td><td>'+value.gasto+'</td></tr>'
-            $('#tblEgresos').append(row);
-          }
-        });
-
-        $('#tblCaja').append('<tr><td>Caja Chica</td><td>'+egresos+'</td></tr>');
-        $('#tblCaja').append('<tr><td>Total</td><td>'+(ingresos-egresos)+'</td></tr>');
-
       }, error: function(){
       }
     });

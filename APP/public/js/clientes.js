@@ -84,9 +84,15 @@ function editar(id){
 }
 
 function addRow(value){
+  var rol = window.localStorage.getItem('rol');
+  if(rol == 'ADMIN'){
+    controls = '<button class="btn-floating btn-flat tooltipped" data-position="bottom" data-delay="50" data-tooltip="Editar" onclick="editar('+value.id+')"><i class="material-icons blue-grey-text">edit</i></button>'
+    + '<button class="tooltipped btn-floating btn-flat" data-position="bottom" data-delay="50" data-tooltip="Eliminar" onclick="eliminar('+value.id+')"><i class="material-icons blue-grey-text">delete</i></button>'
+  } else {
+    controls = '';
+  }
   row = '<tr><td>'+value.nombre+'</td><td>'+value.nit+'</td><td>'+value.telefono+'</td><td>'+value.direccion+'</td><td>'+value.estado+'</td><td>'+formatDate(value.agregado)+'</td>'
-  + '<td><button class="btn-floating btn-flat tooltipped" data-position="bottom" data-delay="50" data-tooltip="Editar" onclick="editar('+value.id+')"><i class="material-icons blue-grey-text">edit</i></button>'
-  + '<button class="tooltipped btn-floating btn-flat" data-position="bottom" data-delay="50" data-tooltip="Eliminar" onclick="eliminar('+value.id+')"><i class="material-icons blue-grey-text">delete</i></button>' +'</td></tr>';
+  + '<td>'+ controls +'</td></tr>';
   $('#tblClientes').append(row);
   row = '';
 }
