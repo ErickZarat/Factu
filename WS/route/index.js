@@ -50,7 +50,8 @@ ruta.post('/usuario', function(req, res){
     passwd:req.body.passwd,
     nombre:req.body.nombre,
     email:req.body.email,
-    agregado:req.body.agregado
+    agregado:req.body.agregado,
+    rol:req.body.rol
   }
   usuario.agregar(req, res, usr, connection);
 });

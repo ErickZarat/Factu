@@ -81,11 +81,13 @@ function editar(id){
     url: uri+'/'+id,
     type: 'GET',
     success: function(data){
+      console.log(data);
       $('#txtEdName').val(data.nombre);
       $('#txtEdEmail').val(data.email);
       $('#txtEdFecha').val(formatDateWS(data.agregado));
       $('#txtEdUsername').val(data.username);
       $('#txtEdPassword').val(data.passwd);
+      $('#slcEdRol option[value="'+data.rolId+'"]').prop('selected', true)
     },
     headers: {"x-access-token": window.localStorage.getItem('token')},
     error: function(){
@@ -101,7 +103,8 @@ function editar(id){
       email: $('#txtEdEmail').val(),
       agregado: $('#txtEdFecha').val(),
       username: $('#txtEdUsername').val(),
-      passwd: $('#txtEdPassword').val()
+      passwd: $('#txtEdPassword').val(),
+      rol: $('#slcEdRol').val()
     }
 
     $.ajax({
@@ -146,14 +149,15 @@ $(document).ready(function(){
   });
 
   $('#btnAgregar').click(function(){
+
     var usr = {
       nombre: $('#txtName').val(),
       email: $('#txtEmail').val(),
       agregado: getCurrentDate(),
       username: $('#txtUsername').val(),
-      passwd: $('#txtPassword').val()
+      passwd: $('#txtPassword').val(),
+      rol: $('#slcRol').val()
     }
-
     $.ajax({
       url: uri,
       headers: {"x-access-token": window.localStorage.getItem('token')},
