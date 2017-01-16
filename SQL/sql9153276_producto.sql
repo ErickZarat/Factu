@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.13, for linux-glibc2.5 (x86_64)
 --
--- Host: 127.0.0.1    Database: factu
+-- Host: sql9.freemysqlhosting.net    Database: sql9153276
 -- ------------------------------------------------------
--- Server version	5.7.16-0ubuntu0.16.04.1
+-- Server version	5.5.50-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,29 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `caja_chica`
+-- Table structure for table `producto`
 --
 
-DROP TABLE IF EXISTS `caja_chica`;
+DROP TABLE IF EXISTS `producto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `caja_chica` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `desc` varchar(100) DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  `gasto` double DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+CREATE TABLE `producto` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `cod` varchar(15) NOT NULL,
+  `producto` varchar(100) DEFAULT NULL,
+  `estado` int(10) unsigned DEFAULT NULL,
+  `agregado` date DEFAULT NULL,
+  `precio` double DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_productos_1_idx` (`estado`),
+  CONSTRAINT `fk_productos_1` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `caja_chica`
+-- Dumping data for table `producto`
 --
 
-LOCK TABLES `caja_chica` WRITE;
-/*!40000 ALTER TABLE `caja_chica` DISABLE KEYS */;
-INSERT INTO `caja_chica` VALUES (1,'Gasto de agua','2017-01-06',200.6),(2,'gasto de luz','2017-01-01',500),(4,'Gasto de Comida','2017-01-08',40),(5,'gasto de uniformes','2017-01-08',200),(6,'gasto de material','2017-01-08',50),(7,'Gasto de limpieza','2017-01-08',100);
-/*!40000 ALTER TABLE `caja_chica` ENABLE KEYS */;
+LOCK TABLES `producto` WRITE;
+/*!40000 ALTER TABLE `producto` DISABLE KEYS */;
+INSERT INTO `producto` VALUES (1,'AKI','Vitamina B',1,'2017-01-05',35.5),(3,'LOP','Vitamina C',2,'2017-01-05',26.3),(4,'QWE','Complejo B',1,'2016-12-07',1200.45),(5,'PWT','Consulta Medica Ofmatologica',2,'2016-12-07',150.6),(6,'LDN','Suero Diabetico',1,'2016-12-07',50),(7,'QIM','Suplemento Alimenticio',1,'2016-12-07',200),(8,'CON-MED1','Consulta Medicina General',2,'2017-01-12',200);
+/*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-10 16:00:33
+-- Dump completed on 2017-01-16 11:14:32

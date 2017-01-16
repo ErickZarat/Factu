@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.13, for linux-glibc2.5 (x86_64)
 --
--- Host: 127.0.0.1    Database: factu
+-- Host: sql9.freemysqlhosting.net    Database: sql9153276
 -- ------------------------------------------------------
--- Server version	5.7.16-0ubuntu0.16.04.1
+-- Server version	5.5.50-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,36 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `configuracion`
+-- Table structure for table `estado`
 --
 
-DROP TABLE IF EXISTS `configuracion`;
+DROP TABLE IF EXISTS `estado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `configuracion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  `telefono` varchar(45) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `iva` double DEFAULT NULL,
-  `moneda` varchar(1) DEFAULT NULL,
-  `direccion` varchar(100) DEFAULT NULL,
-  `ciudad` varchar(100) DEFAULT NULL,
-  `region` varchar(100) DEFAULT NULL,
-  `codpostal` int(11) DEFAULT NULL,
-  `img` mediumtext CHARACTER SET ascii,
+CREATE TABLE `estado` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `desc` varchar(45) DEFAULT NULL,
+  `cat` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `configuracion`
+-- Dumping data for table `estado`
 --
 
-LOCK TABLES `configuracion` WRITE;
-/*!40000 ALTER TABLE `configuracion` DISABLE KEYS */;
-INSERT INTO `configuracion` VALUES (1,'nombre 1','2332323232','correo@correo.com',12,'Q','Guatemala','Guatemala','Guatemala',10011,'');
-/*!40000 ALTER TABLE `configuracion` ENABLE KEYS */;
+LOCK TABLES `estado` WRITE;
+/*!40000 ALTER TABLE `estado` DISABLE KEYS */;
+INSERT INTO `estado` VALUES (1,'Activo','ACT'),(2,'Inactivo','ACT'),(3,'Pagado','FAC'),(4,'No Pagado','FAC');
+/*!40000 ALTER TABLE `estado` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-10 16:00:33
+-- Dump completed on 2017-01-16 11:14:43

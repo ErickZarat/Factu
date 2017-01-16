@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.13, for linux-glibc2.5 (x86_64)
 --
--- Host: 127.0.0.1    Database: factu
+-- Host: sql9.freemysqlhosting.net    Database: sql9153276
 -- ------------------------------------------------------
--- Server version	5.7.16-0ubuntu0.16.04.1
+-- Server version	5.5.50-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,33 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `prod_fact`
+-- Table structure for table `usuario`
 --
 
-DROP TABLE IF EXISTS `prod_fact`;
+DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `prod_fact` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `prod` int(10) unsigned NOT NULL,
-  `fact` int(10) unsigned NOT NULL,
-  `cant` int(11) NOT NULL,
+CREATE TABLE `usuario` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `agregado` date NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `passwd` varchar(45) NOT NULL,
+  `rol` int(10) unsigned DEFAULT '2',
   PRIMARY KEY (`id`),
-  KEY `prod` (`prod`),
-  KEY `fact` (`fact`),
-  CONSTRAINT `prod_fact_ibfk_1` FOREIGN KEY (`prod`) REFERENCES `producto` (`id`),
-  CONSTRAINT `prod_fact_ibfk_2` FOREIGN KEY (`fact`) REFERENCES `factura` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  KEY `fk_usuario_1_idx` (`rol`),
+  CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`rol`) REFERENCES `rol` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `prod_fact`
+-- Dumping data for table `usuario`
 --
 
-LOCK TABLES `prod_fact` WRITE;
-/*!40000 ALTER TABLE `prod_fact` DISABLE KEYS */;
-INSERT INTO `prod_fact` VALUES (1,3,15,1),(2,1,15,1),(3,3,15,1),(4,1,15,1);
-/*!40000 ALTER TABLE `prod_fact` ENABLE KEYS */;
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'Erick Zarat','ezarat15@gmail.com','2017-01-04','admin','admin',1),(2,'Jose Perez','jperez@gmail.com','2017-01-06','josse','jose',2),(3,'Mario Garcia','mgarcia@gmail.com','2017-01-06','mario','mario',3),(6,'Ana Cabrera','acabrera@hotmail.com','2017-01-06','ana','ana',4),(9,'Javier Vergara','javierv@gmail.com','2017-01-07','javier','javier',2),(10,'Karla Orellana','korellana@gmail.com','2017-01-07','karla','karla',2);
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-10 16:00:33
+-- Dump completed on 2017-01-16 11:14:29
