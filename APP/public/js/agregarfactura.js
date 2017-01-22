@@ -1,6 +1,6 @@
 var server = 'http://factuws-95180.app.xervo.io/api/v1/',
 //var server = 'http://localhost:3001/api/v1/'
-appServer = 'http://localhost:3000/',
+appServer = 'http://factu-95214.app.xervo.io/',
 uri = {
   cliente: server + 'cliente',
   producto: server + 'producto',

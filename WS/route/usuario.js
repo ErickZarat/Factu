@@ -7,10 +7,10 @@ var usr = {
   ///////////////// INICIO DE SESION ///////////////////////////////////////////
   login: function(req, res, usuario, connection){
     if (connection) {
-      connection.query('SELECT u.id, u.nombre, u.email, u.agregado, u.username, u.passwd, u.rol rolId, r.nombre rolNombre, r.descripcion rolDesc FROM usuario u, rol r WHERE u.rol = r.id AND username=? and passwd=?;', [usuario.username, usuario.passwd],
+      connection.query('SELECT u.id, u.nombre, u.email, u.agregado, u.username, u.passwd, u.rol rolId, r.nombre rolNombre, r.descripcion rolDesc FROM usuario u, rol r WHERE u.rol = r.id AND u.username=? and u.passwd=?;', [usuario.username, usuario.passwd],
       function(error, resultado){
         if(error){
-          res.json({"msg":"Usuario y/o clave incorrecta"});
+          res.json({"msg":"Usuario y/o clave incorrecta" + error});
         }else {
           if (typeof resultado[0] == undefined || typeof resultado[0] == 'undefined' ) { res.json({"msg":"Error al iniciar sesion"}); }
           else{ res.json(genToken(resultado[0])); }

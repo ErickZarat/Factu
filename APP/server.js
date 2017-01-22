@@ -172,11 +172,12 @@ app.get('/logout',function(req,res){
 });
 
 ///// DEVELOPMENT CONFIG
-app.listen(3000, function(){
+/*app.listen(3000, function(){
   console.log('Listen on port: 3000');
-});
+});*/
 
 ///// PRODUCTION CONFIG
-/*app.listen(process.env.PORT,function(){
+var port = process.env.PORT || 3000;
+app.listen(port,function(){
 console.log("App Started on PORT " + process.env.PORT);
-});*/
+});

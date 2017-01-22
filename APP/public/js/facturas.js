@@ -1,7 +1,7 @@
 var uri = 'http://factuws-95180.app.xervo.io/api/v1/factura';
 //var uri = 'http://localhost:3001/api/v1/factura'
 //var server = 'http://factu-95214.app.xervo.io/'
-var server = 'http://localhost:3000/';
+var server = 'http://factu-95214.app.xervo.io/';
 
 
 $('#progressBar').show();
