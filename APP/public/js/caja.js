@@ -1,7 +1,7 @@
-var server = 'http://factuws-95180.app.xervo.io/api/v1/'
+
 var uri = {
-  cajachica: server + 'cajachica-fecha',
-  factura: server + 'factura-fecha'
+  cajachica: apiServer + 'cajachica-fecha',
+  factura: apiServer + 'factura-fecha'
 }
 
 var ingresos = 0;

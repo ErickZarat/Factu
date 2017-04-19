@@ -1,12 +1,10 @@
-var server = 'http://factuws-95180.app.xervo.io/api/v1/',
-//var server = 'http://localhost:3001/api/v1/'
-appServer = 'http://factu-95214.app.xervo.io/',
+
 uri = {
-  cliente: server + 'cliente',
-  producto: server + 'producto',
-  factura: server + 'factura',
-  config: server + 'configuracion',
-  prodfact: server + 'prodfact',
+  cliente: apiServer + 'cliente',
+  producto: apiServer + 'producto',
+  factura: apiServer + 'factura',
+  config: apiServer + 'configuracion',
+  prodfact: apiServer + 'prodfact',
   generador: appServer + 'generarfactura?facturaId='
 }
 

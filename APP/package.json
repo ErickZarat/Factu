@@ -1,9 +1,9 @@
 {
   "name": "Factu",
   "version": "0.0.1",
-  "main": "server.js",
+  "main": "factu.js",
   "scripts": {
-    "start": "supervisor server.js"
+    "start": "supervisor factu.js"
   },
   "dependencies": {
     "body-parser": "^1.7.0",

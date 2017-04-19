@@ -10,10 +10,10 @@ estado = require('./estado.js'),
 prodfact = require('./prodfact'),
 mysql = require('mysql'),
 parametros = {
-  host : 'sql3.freemysqlhosting.net',
-  user : 'sql3154298',
-  password : 'yKFzZpp78A',
-  database : 'sql3154298'
+  host : '104.236.20.251',
+  user : 'ezarat',
+  password : '3Zdb$+15',
+  database : 'factu'
 }
 /*parametros = {
 host : 'localhost',

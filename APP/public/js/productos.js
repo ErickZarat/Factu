@@ -1,4 +1,4 @@
-var uri = 'http://factuws-95180.app.xervo.io/api/v1/producto';
+var uri = apiServer+'producto';
 
 
 $('#progressBar').show();

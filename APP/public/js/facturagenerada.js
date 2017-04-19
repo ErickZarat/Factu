@@ -1,8 +1,8 @@
-var server = 'http://factuws-95180.app.xervo.io/api/v1/'
+
 var uri = {
-  conf: server + 'configuracion',
-  prodfact: server + 'prodfact',
-  factura: server + 'factura'
+  conf: apiServer + 'configuracion',
+  prodfact: apiServer + 'prodfact',
+  factura: apiServer + 'factura'
 }
 var
  form = $('body'),
