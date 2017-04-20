@@ -187,6 +187,7 @@ ruta.post('/producto', function(req, res){
     estado:req.body.estado,
     agregado:req.body.agregado,
     precio:req.body.precio,
+    img:req.body.img
   }
   producto.agregar(req, res, data, connection);
 });
