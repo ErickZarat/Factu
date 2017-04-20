@@ -48,47 +48,59 @@ function editar(id){
   });
 
   $('#btnModificar').click(function(){
-    var est = '';
-
-    if($('#chbEdEstado').is(':checked')){
-      est = '1'
-    }else {
-      est = '2';
-    }
-
-    var prd = {
-      id: id,
-      cod: $('#txtEdCod').val(),
-      producto: $('#txtEdName').val(),
-      estado: est,
-      precio: $('#txtEdPrecio').val(),
-      agregado: $('#txtEdAgregado').val()
-    }
-
+    var formData = new FormData($('#uploadFormEd')[0]);
     $.ajax({
-      url: uri,
-      headers: {"x-access-token": window.localStorage.getItem('token')},
-      data: prd,
-      error: function(){
-        alert('error en peticion');
-      },
-      success: function(data){
-        Materialize.toast(data.msg, 3000, 'rounded', function(){location.reload();})
-      },
-      type: 'PUT'
+      type: 'POST',
+      url: appServer + 'api/photo-prod',
+      data: formData,
+      contentType: false,
+      processData: false
+    }).done(function(response){
+      var est = '';
+
+      if($('#chbEdEstado').is(':checked')){
+        est = '1'
+      }else {
+        est = '2';
+      }
+
+      var prd = {
+        id: id,
+        cod: $('#txtEdCod').val(),
+        producto: $('#txtEdName').val(),
+        estado: est,
+        precio: $('#txtEdPrecio').val(),
+        agregado: $('#txtEdAgregado').val(),
+        img:response.hashName
+      }
+
+      $.ajax({
+        url: uri,
+        headers: {"x-access-token": window.localStorage.getItem('token')},
+        data: prd,
+        error: function(){
+          alert('error en peticion');
+        },
+        success: function(data){
+          Materialize.toast(data.msg, 3000, 'rounded', function(){location.reload();})
+        },
+        type: 'PUT'
+      });
     });
+  }).fail(function(data){
+    console.log(data);
   });
 }
 
 function addRow(value){
-    var rol = window.localStorage.getItem('rol');
+  var rol = window.localStorage.getItem('rol');
   if(rol == 'ADMIN'){
     controls = '<button class="btn-floating btn-flat tooltipped" data-position="bottom" data-delay="50" data-tooltip="Editar" onclick="editar('+value.id+')"><i class="material-icons blue-grey-text">edit</i></button>'
     + '<button class="tooltipped btn-floating btn-flat" data-position="bottom" data-delay="50" data-tooltip="Eliminar" onclick="eliminar('+value.id+')"><i class="material-icons blue-grey-text">delete</i></button>';
   }else {
     controls = '';
   }
-  row = '<tr><td>'+value.cod+'</td><td>'+value.producto+'</td><td>'+value.estado+'</td><td>'+formatDate(value.agregado)+'</td><td>'+value.precio+'</td>'
+  row = '<tr><td><img src="../uploads/productos/'+(value.img||'none')+'" alt="Producto" height="100px" width="100px" /></td><td>'+value.cod+'</td><td>'+value.producto+'</td><td>'+value.estado+'</td><td>'+formatDate(value.agregado)+'</td><td>'+value.precio+'</td>'
   + '<td>'+ controls +'</td></tr>';
   $('#tblProductos').append(row);
   row = '';
@@ -111,35 +123,65 @@ $(document).ready(function(){
     type: 'GET'
   });
 
+  $('#uploadForm').submit(function(e){
+    e.preventDefault();
+    var formData = new FormData($('#uploadForm')[0]);
+    $.ajax({
+      type: 'POST',
+      url: appServer + 'api/photo-prod',
+      data: formData,
+      contentType: false,
+      processData: false
+    }).done(function(data){
+      console.log(data);
+    }).fail(function(data){
+      console.log(data);
+    });
+  });
+
   $('#btnAgregar').click(function(){
 
-    var est = '';
-
-    if($('#chbEstado').is(':checked')){
-      est = '1'
-    }else {
-      est = '2';
-    }
-
-    var prd = {
-      cod: $('#txtCod').val(),
-      producto: $('#txtName').val(),
-      estado: est,
-      precio: $('#txtPrecio').val(),
-      agregado: getCurrentDate()
-    }
-
+    var formData = new FormData($('#uploadForm')[0]);
     $.ajax({
-      url: uri,
-      headers: {"x-access-token": window.localStorage.getItem('token')},
-      data: prd,
-      error: function(){
-        alert('error en peticion');
-      },
-      success: function(data){
-        Materialize.toast(data.msg, 3000, 'rounded', function(){location.reload();})
-      },
-      type: 'POST'
+      type: 'POST',
+      url: appServer + 'api/photo-prod',
+      data: formData,
+      contentType: false,
+      processData: false
+    }).done(function(response){
+      console.log(response)
+      var est = '';
+
+      if($('#chbEstado').is(':checked')){
+        est = '1'
+      }else {
+        est = '2';
+      }
+
+      var prd = {
+        cod: $('#txtCod').val(),
+        producto: $('#txtName').val(),
+        estado: est,
+        precio: $('#txtPrecio').val(),
+        agregado: getCurrentDate(),
+        img: response.hashName
+      }
+      console.log(prd);
+
+      $.ajax({
+        url: uri,
+        headers: {"x-access-token": window.localStorage.getItem('token')},
+        data: prd,
+        error: function(){
+          alert('error en peticion');
+        },
+        success: function(data){
+          Materialize.toast(data.msg, 3000, 'rounded', function(){location.reload();})
+        },
+        type: 'POST'
+      });
+    }).fail(function(data){
+      console.log(data);
     });
   });
 
