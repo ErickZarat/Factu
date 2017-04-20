@@ -64,9 +64,10 @@ app.post('/api/photo-prod',function(req,res){
     for( var i=0; i < 8; i++ )
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     hashName = text;
+    console.log(hashName);
     upload(req,res,function(err) {
         if(err) {
-            return res.end("Error uploading file." + err);
+            console.log(err);
             res.json({"success":false});
         }
         res.json({"hashName":hashName});
