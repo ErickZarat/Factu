@@ -1,20 +1,21 @@
 /*
 * Author : ErickZarat
 */
-var express		  =	require('express');
-var session		  =	require('express-session');
-var bodyParser  = require('body-parser');
-var path  			= require('path');
-var cors 				= require('cors');
-var multer      = require('multer');
-var app			    =	express();
+var express	= require('express');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var path = require('path');
+var cors = require('cors');
+var multer = require('multer');
+var app = express();
+var imgLocation, hashName;
 var storage =   multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, __dirname + '/public/uploads');
-  },
-  filename: function (req, file, callback) {
-    callback(null, 'fotoEmpresa');
-  }
+    destination: function (req, file, callback) {
+        callback(null, __dirname + imgLocation);
+    },
+    filename: function (req, file, callback) {
+        callback(null, hashName);
+    }
 });
 var upload = multer({ storage : storage}).single('userPhoto');
 
@@ -45,13 +46,31 @@ app.get('/',function(req,res){
 });
 
 app.post('/api/photo',function(req,res){
-  upload(req,res,function(err) {
-    if(err) {
-      return res.end("Error uploading file." + err);
-      res.redirect('/configuracion');
-    }
-    res.redirect('/configuracion');
-  });
+    hashName = 'fotoEmpresa';
+    imgLocation = '/public/uploads';
+    upload(req,res,function(err) {
+        if(err) {
+            return res.end("Error uploading file." + err);
+            res.redirect('/configuracion');
+        }
+        res.redirect('/configuracion');
+    });
+});
+
+app.post('/api/photo-prod',function(req,res){
+    imgLocation = '/public/uploads/productos';
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for( var i=0; i < 8; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    hashName = text;
+    upload(req,res,function(err) {
+        if(err) {
+            return res.end("Error uploading file." + err);
+            res.json({"success":false});
+        }
+        res.json({"hashName":hashName});
+    });
 });
 
 

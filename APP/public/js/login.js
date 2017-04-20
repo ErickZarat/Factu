@@ -1,5 +1,6 @@
 var apiServer = 'http://104.236.20.251:3002/api/v1/';
 var appServer = 'http://104.236.20.251:7000/';
+//var appServer = 'http://localhost:7000/';
 var uri = {
   factura: appServer + 'facturas',
   session: appServer + 'session',

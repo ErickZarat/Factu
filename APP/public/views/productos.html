@@ -1,145 +1,176 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <% include /partial/head %>
-  <title>Productos</title>
+    <% include /partial/head %>
+    <title>Productos</title>
 </head>
 <body>
-  <% include /partial/header %>
+    <% include /partial/header %>
 
-  <div class="container">
+    <div class="container">
 
-    <div id="fabButton" class="fixed-action-btn" style="bottom: 10%; right: 5%;">
-      <a id="btnAdd" class="modal-trigger waves-effect waves-light btn-large red btn-floating" href="#mdlNuevo">
-        <i class="large material-icons">add</i>
-      </a>
-    </div>
+        <div id="fabButton" class="fixed-action-btn" style="bottom: 10%; right: 5%;">
+            <a id="btnAdd" class="modal-trigger waves-effect waves-light btn-large red btn-floating" href="#mdlNuevo">
+                <i class="large material-icons">add</i>
+            </a>
+        </div>
 
-    <div class="card grey lighten-4 hoverable valign card-margin">
-      <div class="progress" id="progressBar">
-        <div class="indeterminate"></div>
-      </div>
-      <div class="card-content black-text">
-        <span class="card-title"><strong>Productos</strong></span>
-        <div class="right">
-          <div class="row">
-            <div class="input-field col-s4">
-              <i class="material-icons prefix left">search</i>
-              <input type="text" id="txtSearch" value="">
-              <label for="txtSearch">Buscar</label>
-
+        <div class="card grey lighten-4 hoverable valign card-margin">
+            <div class="progress" id="progressBar">
+                <div class="indeterminate"></div>
             </div>
-          </div>
-        </div>
-        <br/><br/>
-        <table class="striped responsive-table">
-          <thead>
-            <tr>
-              <th>Codigo</th>
-              <th>Producto</th>
-              <th>Estado</th>
-              <th>Agregado</th>
-              <th>Precio</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="tblProductos">
+            <div class="card-content black-text">
+                <span class="card-title"><strong>Productos</strong></span>
+                <div class="right">
+                    <div class="row">
+                        <div class="input-field col-s4">
+                            <i class="material-icons prefix left">search</i>
+                            <input type="text" id="txtSearch" value="">
+                            <label for="txtSearch">Buscar</label>
 
-          </tbody>
-        </table>
-      </div>
+                        </div>
+                    </div>
+                </div>
+                <br/><br/>
+                <table class="striped responsive-table">
+                    <thead>
+                        <tr>
+                            <th>Img</th>
+                            <th>Codigo</th>
+                            <th>Producto</th>
+                            <th>Estado</th>
+                            <th>Agregado</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblProductos">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!--  MODALS  -->
+    <!--  MODALS  -->
 
-  <!-- NUEVO PRODUCTO -->
-  <div id="mdlNuevo" class="modal">
-    <div class="modal-content">
-      <div class="valign">
-        <h4>Nuevo Producto</h4>
-        <div class="input-field margin-on-modal">
-          <input id="txtCod" type="text" class="validate" required>
-          <label for="txtCod" style="text-align: left;">Codigo</label>
-        </div>
-        <div class="input-field margin-on-modal">
-          <input id="txtName" type="text" class="validate" required>
-          <label for="txtName" style="text-align: left;">Nombre</label>
-        </div>
-        <div class="input-field margin-on-modal">
-          <input id="txtPrecio" type="text" class="validate" required>
-          <label for="txtPrecio" style="text-align: left;">Precio</label>
-        </div>
+    <!-- NUEVO PRODUCTO -->
+    <div id="mdlNuevo" class="modal">
+        <div class="modal-content">
+            <div class="valign">
+                <h4>Nuevo Producto</h4>
+                <div class="input-field margin-on-modal">
+                    <input id="txtCod" type="text" class="validate" required>
+                    <label for="txtCod" style="text-align: left;">Codigo</label>
+                </div>
+                <div class="input-field margin-on-modal">
+                    <input id="txtName" type="text" class="validate" required>
+                    <label for="txtName" style="text-align: left;">Nombre</label>
+                </div>
+                <div class="input-field margin-on-modal">
+                    <input id="txtPrecio" type="text" class="validate" required>
+                    <label for="txtPrecio" style="text-align: left;">Precio</label>
+                </div>
 
-        <div class="switch  margin-on-modal">
-          <label>
-            Inactivo
-            <input type="checkbox" id="chbEstado">
-            <span class="lever"></span>
-            Activo
-          </label>
+                <div class="switch  margin-on-modal">
+                    <label>
+                        Inactivo
+                        <input type="checkbox" id="chbEstado">
+                        <span class="lever"></span>
+                        Activo
+                    </label>
+                </div>
+                <form id        =  "uploadForm"
+                enctype   =  "multipart/form-data"
+                action    =  "/api/photo-prod"
+                method    =  "post"
+                >
+                <div class="file-field input-field margin-on-modal">
+                    <div class="btn blue waves-effect light-waves">
+                        <span>Seleccionar</span>
+                        <input type="file" onchange="readURL(this);" name="userPhoto">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            </form>
         </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnAgregar">Agregar</button>
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-    </div>
-  </div>
-
-
-  <!-- EDITAR Producto -->
-  <div id="mdlEditar" class="modal">
-    <div class="modal-content">
-      <div class="valign">
-        <h4>Modificar Producto</h4>
-        <input type="hidden" id="txtEdAgregado" value="">
-        <div class="input-field margin-on-modal">
-          <input id="txtEdCod" type="text" class="validate" value=" ">
-          <label for="txtEdCod" style="text-align: left;">Codigo</label>
-        </div>
-        <div class="input-field margin-on-modal">
-          <input id="txtEdName" type="text" class="validate" value=" ">
-          <label for="txtEdName" style="text-align: left;">Nombre</label>
-        </div>
-        <div class="input-field margin-on-modal">
-          <input id="txtEdPrecio" type="text" class="validate" value=" ">
-          <label for="txtEdPrecio" style="text-align: left;">Precio</label>
-        </div>
-        <div class="switch margin-on-modal">
-
-          <label>
-            Inactivo
-            <input type="checkbox" id="chbEdEstado">
-            <span class="lever"></span>
-            Activo
-          </label>
-        </div>
-      </div>
     </div>
     <div class="modal-footer">
-      <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnModificar">Modificar</button>
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+        <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnAgregar">Agregar</button>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
     </div>
-  </div>
+</div>
 
-  <!-- ELIMINAR PRODUCTO -->
-  <div id="mdlEliminar" class="modal">
+
+<!-- EDITAR Producto -->
+<div id="mdlEditar" class="modal">
     <div class="modal-content">
-      <div class="valign">
-        <h4>Eliminar Producto</h4>
-        <p>
-          Esta seguro de que desea eliminar el Producto?
-        </p>
-      </div>
+        <div class="valign">
+            <h4>Modificar Producto</h4>
+            <input type="hidden" id="txtEdAgregado" value="">
+            <div class="input-field margin-on-modal">
+                <input id="txtEdCod" type="text" class="validate" value=" ">
+                <label for="txtEdCod" style="text-align: left;">Codigo</label>
+            </div>
+            <div class="input-field margin-on-modal">
+                <input id="txtEdName" type="text" class="validate" value=" ">
+                <label for="txtEdName" style="text-align: left;">Nombre</label>
+            </div>
+            <div class="input-field margin-on-modal">
+                <input id="txtEdPrecio" type="text" class="validate" value=" ">
+                <label for="txtEdPrecio" style="text-align: left;">Precio</label>
+            </div>
+            <div class="switch margin-on-modal">
+
+                <label>
+                    Inactivo
+                    <input type="checkbox" id="chbEdEstado">
+                    <span class="lever"></span>
+                    Activo
+                </label>
+            </div>
+            <form id        =  "uploadFormEd"
+            enctype   =  "multipart/form-data"
+            action    =  "/api/photo-prod"
+            method    =  "post"
+            >
+            <div class="file-field input-field margin-on-modal">
+                <div class="btn blue waves-effect light-waves">
+                    <span>Seleccionar</span>
+                    <input type="file" onchange="readURL(this);" name="userPhoto">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+        </form>
+        </div>
     </div>
     <div class="modal-footer">
-      <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnEliminar">Eliminar</button>
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+        <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnModificar">Modificar</button>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
     </div>
-  </div>
+</div>
 
-  <% include /partial/footer %>
-  <script src="./js/productos.js"></script>
+<!-- ELIMINAR PRODUCTO -->
+<div id="mdlEliminar" class="modal">
+    <div class="modal-content">
+        <div class="valign">
+            <h4>Eliminar Producto</h4>
+            <p>
+                Esta seguro de que desea eliminar el Producto?
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnEliminar">Eliminar</button>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+    </div>
+</div>
+
+<% include /partial/footer %>
+<script src="./js/productos.js"></script>
 </body>
 </html>
