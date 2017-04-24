@@ -11,7 +11,7 @@ uri = {
 var listaProductos = new Array();
 
 function agregarProductoTabla(value){
-  var row = '<tr><td>'+value.cod+'</td><td>'+value.cant+'</td><td>'+value.desc+'</td><td>'+value.precioU+'</td><td>'+value.precioT.toFixed(2)+'</td></tr>'
+  var row = '<tr><td><img src="../uploads/productos/'+(value.img||'none')+'" alt="Producto" height="100px" width="100px" /></td><td>'+value.cod+'</td><td>'+value.cant+'</td><td>'+value.desc+'</td><td>'+value.precioU+'</td><td>'+value.precioT.toFixed(2)+'</td></tr>'
   $('#tblFactura').append(row);
   row = '';
 }
