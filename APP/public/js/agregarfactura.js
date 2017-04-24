@@ -41,6 +41,7 @@ function AgregarAFactura(id){
     desc: $('#tdProd-'+id).text(),
     precioU: $('#tdPrecio-'+id).val(),
     precioT:  $('#tdPrecio-'+id).val() * $('#txtCant-'+id).val()
+    img:$('#tdImg-'+id).val()
   };
   listaProductos.push(prod);
 
@@ -55,7 +56,8 @@ function seleccionarUsuario(id){
 }
 
 function addProductoRow(value){
-  row = '<tr><td id="tdCod-'+value.id+'">'+value.cod+'</td>'
+  row = '<tr><td id="tdImg-'+value.id+'" class="hide">'+value.img+'</td>'
+  +'<td id="tdCod-'+value.id+'">'+value.cod+'</td>'
   +'<td id="tdProd-'+value.id+'">'+value.producto+'</td>'
   +'<td><input type="text" id="txtCant-'+value.id+'" value="1" style="width: 60%;"></td>'
   +'<td><input type="text" id="tdPrecio-'+value.id+'" value="'+value.precio+'" style="width: 60%;"></td>'
