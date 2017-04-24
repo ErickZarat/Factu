@@ -69,12 +69,12 @@ app.post('/api/photo-prod',function(req,res){
       upload(req,res,function(err) {
           if(err) {
               console.log(err);
-              res.json({"success":false});
+              return res.json({"success":false});
           }
-          res.json({"hashName":hashName});
+          return res.json({"hashName":hashName});
       });
     } catch(err){
-      res.json(err);
+      return res.json(err);
     }
 });
 
@@ -87,6 +87,14 @@ app.get('/facturas', function(req, res){
     } else {
       res.redirect('/');
     }
+  }
+  else{ res.redirect('/'); }
+});
+
+app.get('/cotizacion', function(req, res){
+  sess = req.session;
+  if(sess.usr){
+      res.render('cotizacion.html');
   }
   else{ res.redirect('/'); }
 });

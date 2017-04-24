@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include /partial/head %>
+  <title>Nueva Cotizacion</title>
+</head>
+<body>
+  <% include /partial/header %>
+
+  <div class="container">
+    <div class="card hoverable valign grey lighten-4">
+      <div class="card-content hide-print">
+        <span class="card-title hide-print"><strong>Nueva Cotizacion</strong></span>
+        <a class="btn right blue waves-effect light-waves" style="width: 40%;" id="btnSCliente" href="#mdlSeleccionarCliente"><i class="material-icons" >search</i> Seleccionar Cliente</a>
+
+        <div class="row ">
+          <input type="hidden" id="txtIdCliente">
+          <div class="input-field col s4">
+            <input type="text" value=" " disabled id="txtName">
+            <label for="txtName">Nombre Cliente</label>
+          </div>
+          <div class="input-field col s4">
+            <input type="text" value=" " disabled id="txtNit">
+            <label for="txtNit">Nit Cliente</label>
+          </div>
+          <div class="input-field col s4">
+            <input type="text" value=" " disabled id="txtTelefono">
+            <label for="txtTelefono">Telefono</label>
+          </div>
+          <div class="input-field col s4">
+            <input type="text" value=" " disabled id="txtVendedor">
+            <label for="txtVendedor">Vendedor</label>
+          </div>
+          <div class="input-field col s4">
+            <input type="text" value=" " disabled id="txtFecha">
+            <label for="txtFecha">Fecha</label>
+          </div>
+        </div>
+
+        <div class="card-action center">
+          <a type="button" class="btn btn-flat waves-effect blue-waves" id="btnNProducto" href="#mdlNuevoProducto"><i class="material-icons">add</i> Nuevo producto</a>
+          <a type="button" class="btn btn-flat waves-effect blue-waves" id="btnNCliente" href="#mdlNuevoCliente"><i class="material-icons">face</i> Nuevo cliente</a>
+          <a type="button" class="btn btn-flat waves-effect blue-waves" id="btnSProducto" href="#mdlAgregarProducto"><i class="material-icons">search</i> Agregar productos</a>
+          <button type="button" class="btn btn-flat waves-effect blue-waves" id="btnImprimir"><i class="material-icons">print</i>Imprimir Cotizacion</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card hoverable valign grey lighten-4 print">
+      <div class="card-content">
+        <div class="row">
+          <div class="col s6">
+            <img src="../uploads/fotoEmpresa" style="width: 100%; height:100%" alt="LOGO" class="left" />
+          </div>
+          <div class="col s6">
+            <h6 id="txtNumFac" class="right hide">1000</h6><br>
+            <h6 id="txtFechafac" class="right">10/04/2017</h6><br>
+          </div>
+          <div class="col s12"><br>
+            Nombre: <h5 id="txtNombre">Nombre</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div id="factPrint">
+        <div class="card hoverable valign grey lighten-4">
+          <div class="card-content">
+            <table class="striped table-responsive">
+              <thead>
+                <th>CODIGO</th>
+                <th>CANT.</th>
+                <th>DESCRIPCION</th>
+                <th>PRECIO UNIT.</th>
+                <th>PRECIO TOTAL</th>
+              </thead>
+              <tbody id="tblFactura"></tbody>
+            </table>
+
+          </div>
+        </div>
+        <h6><strong>NOTA: </strong>La cotización tiene una válidez de 15 días a partir de la fecha descrita en este documento.<br>La forma de pago es del 50% de anticipo y 50% contraentrega.<br>Los precios incluyen IVA.</h6>
+      </div>
+      <!-- NUEVO cliente -->
+      <div id="mdlNuevoCliente" class="modal">
+        <div class="modal-content">
+          <div class="valign">
+            <h4>Nuevo Cliente</h4>
+            <div class="input-field margin-on-modal">
+              <input id="txtCName" type="text" class="validate" required>
+              <label for="txtCName" style="text-align: left;">Nombre</label>
+            </div>
+            <div class="input-field margin-on-modal">
+              <input id="txtCNit" type="text" class="validate" required>
+              <label for="txtCNit" style="text-align: left;">Nit</label>
+            </div>
+            <div class="input-field margin-on-modal">
+              <input id="txtCTelefono" type="email" class="validate" required>
+              <label for="txtCTelefono" style="text-align: left;">Telefono</label>
+            </div>
+            <div class="input-field margin-on-modal">
+              <input id="txtCDireccion" type="text" class="validate" required>
+              <label for="txtCDireccion" style="text-align: left;">Direccion</label>
+            </div>
+            <div class="switch  margin-on-modal">
+              <label>
+                Inactivo
+                <input type="checkbox" id="chbCEstado">
+                <span class="lever"></span>
+                Activo
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnAgregarCliente">Agregar</button>
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+        </div>
+      </div>
+
+      <!-- NUEVO PRODUCTO -->
+      <div id="mdlNuevoProducto" class="modal">
+        <div class="modal-content">
+          <div class="valign">
+            <h4>Nuevo Producto</h4>
+            <div class="input-field margin-on-modal">
+              <input id="txtPCod" type="text" class="validate" required>
+              <label for="txtPCod" style="text-align: left;">Codigo</label>
+            </div>
+            <div class="input-field margin-on-modal">
+              <input id="txtPName" type="text" class="validate" required>
+              <label for="txtPName" style="text-align: left;">Nombre</label>
+            </div>
+            <div class="input-field margin-on-modal">
+              <input id="txtPPrecio" type="text" class="validate" required>
+              <label for="txtPPrecio" style="text-align: left;">Precio</label>
+            </div>
+
+            <div class="switch  margin-on-modal">
+              <label>
+                Inactivo
+                <input type="checkbox" id="chbPEstado">
+                <span class="lever"></span>
+                Activo
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnAgregarProducto">Agregar</button>
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+        </div>
+      </div>
+
+      <!-- Agregar PRODUCTO -->
+      <div id="mdlAgregarProducto" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <div class="valign">
+            <h4>Agregar Producto</h4>
+            <div class="right">
+              <div class="input-field">
+                <i class="material-icons prefix left">search</i>
+                <input type="text" id="txtSearchProducto" value="">
+                <label for="txtSearchProducto">Buscar</label>
+              </div>
+            </div>
+            <br/><br/>
+            <table class="striped responsive-table">
+              <thead>
+                <tr>
+                  <th>Codigo</th>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                  <th>Agregar</th>
+                </tr>
+              </thead>
+              <tbody id="tblProductos">
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cerrar</a>
+        </div>
+      </div>
+
+      <div class="modal modal-fixed-footer" id="mdlSeleccionarCliente">
+        <div class="modal-content">
+          <span class="card-title"><strong>Seleccionar Cliente</strong></span>
+          <div class="right">
+            <div class="row">
+              <div class="input-field col-s4">
+                <i class="material-icons prefix left">search</i>
+                <input type="text" id="txtSearchCliente" value="">
+                <label for="txtSearchCliente">Buscar</label>
+
+              </div>
+            </div>
+          </div>
+          <br/><br/>
+          <table class="striped responsive-table">
+            <thead>
+              <tr>
+                <th>Nombres</th>
+                <th>Nit</th>
+                <th>Telefono</th>
+                <th>Direccion</th>
+                <th>Seleccionar</th>
+              </tr>
+            </thead>
+            <tbody id="tblClientes">
+
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cerrar</a>
+        </div>
+      </div>
+    </div>
+
+    <% include /partial/footer %>
+    <script src="./js/cotizacion.js"></script>
+  </body>
+  </html>
