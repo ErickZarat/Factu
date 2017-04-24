@@ -40,7 +40,7 @@ function AgregarAFactura(id){
     cant: $('#txtCant-'+id).val(),
     desc: $('#tdProd-'+id).text(),
     precioU: $('#tdPrecio-'+id).val(),
-    precioT:  $('#tdPrecio-'+id).val() * $('#txtCant-'+id).val()
+    precioT:  $('#tdPrecio-'+id).val() * $('#txtCant-'+id).val(),
     img:$('#tdImg-'+id).val()
   };
   listaProductos.push(prod);
