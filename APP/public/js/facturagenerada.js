@@ -1,4 +1,4 @@
-
+apiServer = 'http://104.236.20.251:3002/api/v1/';
 var uri = {
   conf: apiServer + 'configuracion',
   prodfact: apiServer + 'prodfact',

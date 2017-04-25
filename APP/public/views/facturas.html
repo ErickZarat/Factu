@@ -1,153 +1,152 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <% include /partial/head %>
-  <title>Factura</title>
+    <% include /partial/head %>
+    <title>Factura</title>
 </head>
 <body>
-  <% include /partial/header %>
+    <% include /partial/header %>
 
-  <div class="container">
+    <div class="container">
 
-    <div id="fabButton" class="fixed-action-btn" style="bottom: 10%; right: 5%;">
-        <a href="/cotizacion" class="btn-floating blue"><i class="material-icons">description</i></a>
-      <a id="btnAdd" class="modal-trigger waves-effect waves-light btn-large red btn-floating" href="/agregarfactura">
-        <i class="large material-icons">add</i>
-      </a>
-    </div>
+        <div id="fabButton" class="fixed-action-btn" style="bottom: 10%; right: 5%;">
+            <a href="/cotizacion" class="btn-floating blue"><i class="material-icons">description</i></a>
+            <a id="btnAdd" class="modal-trigger waves-effect waves-light btn-large red btn-floating" href="/agregarfactura">
+                <i class="large material-icons">add</i>
+            </a>
+        </div>
 
-    <div class="card grey lighten-4 hoverable valign card-margin">
-      <div class="progress" id="progressBar">
-        <div class="indeterminate"></div>
-      </div>
-      <div class="card-content black-text">
-        <span class="card-title"><strong>Facturas</strong></span>
-        <div class="right">
-          <div class="row">
-            <div class="input-field col-s4">
-              <i class="material-icons prefix left">search</i>
-              <input type="text" id="txtSearch" value="">
-              <label for="txtSearch">Buscar</label>
-
+        <div class="card grey lighten-4 hoverable valign card-margin">
+            <div class="progress" id="progressBar">
+                <div class="indeterminate"></div>
             </div>
-          </div>
-        </div>
-        <br/><br/>
-        <table class="striped responsive-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Fecha</th>
-              <th>Cliente</th>
-              <th>Vendedor</th>
-              <th>Estado</th>
-              <th>Total</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="tblFacturas">
+            <div class="card-content black-text">
+                <span class="card-title"><strong>Facturas</strong></span>
+                <div class="right">
+                    <div class="row">
+                        <div class="input-field col-s4">
+                            <i class="material-icons prefix left">search</i>
+                            <input type="text" id="txtSearch" value="">
+                            <label for="txtSearch">Buscar</label>
 
-          </tbody>
-        </table>
-      </div>
+                        </div>
+                    </div>
+                </div>
+                <br/><br/>
+                <table class="striped responsive-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Fecha</th>
+                            <th>Cliente</th>
+                            <th>Vendedor</th>
+                            <th>Estado</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblFacturas">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!--  MODALS  -->
+    <!--  MODALS  -->
 
-<!-- NUEVO factura -->
-<div id="mdlNuevo" class="modal">
-  <div class="modal-content">
-      <div class="valign">
-        <h4>Nuevo Factura</h4>
-        <div class="input-field margin-on-modal">
-						<input id="txtName" type="text" class="validate" required>
-						<label for="txtName" style="text-align: left;">Nombre</label>
-				</div>
-        <div class="input-field margin-on-modal">
-						<input id="txtNit" type="text" class="validate" required>
-						<label for="txtNit" style="text-align: left;">Nit</label>
-				</div>
-        <div class="input-field margin-on-modal">
-						<input id="txtTelefono" type="email" class="validate" required>
-						<label for="txtTelefono" style="text-align: left;">Telefono</label>
-				</div>
-				<div class="input-field margin-on-modal">
-						<input id="txtDireccion" type="text" class="validate" required>
-						<label for="txtDireccion" style="text-align: left;">Direccion</label>
-				</div>
-        <div class="switch  margin-on-modal">
-          <label>
-            Inactivo
-            <input type="checkbox" id="chbEstado">
-            <span class="lever"></span>
-            Activo
-          </label>
+    <!-- NUEVO factura -->
+    <div id="mdlNuevo" class="modal">
+        <div class="modal-content">
+            <div class="valign">
+                <h4>Nuevo Factura</h4>
+                <div class="input-field margin-on-modal">
+                    <input id="txtName" type="text" class="validate" required>
+                    <label for="txtName" style="text-align: left;">Nombre</label>
+                </div>
+                <div class="input-field margin-on-modal">
+                    <input id="txtNit" type="text" class="validate" required>
+                    <label for="txtNit" style="text-align: left;">Nit</label>
+                </div>
+                <div class="input-field margin-on-modal">
+                    <input id="txtTelefono" type="email" class="validate" required>
+                    <label for="txtTelefono" style="text-align: left;">Telefono</label>
+                </div>
+                <div class="input-field margin-on-modal">
+                    <input id="txtDireccion" type="text" class="validate" required>
+                    <label for="txtDireccion" style="text-align: left;">Direccion</label>
+                </div>
+                <div class="switch  margin-on-modal">
+                    <label>
+                        Inactivo
+                        <input type="checkbox" id="chbEstado">
+                        <span class="lever"></span>
+                        Activo
+                    </label>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
-  <div class="modal-footer">
-    <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnAgregar">Agregar</button>
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-  </div>
-</div>
-
-
-<!-- EDITAR Factura -->
-<div id="mdlEditar" class="modal">
-  <div class="modal-content">
-      <div class="valign">
-        <h4>Modificar Factura</h4>
-        <input type="hidden" id="txtEdAgregado" value="">
-        <div class="input-field margin-on-modal">
-						<input id="txtEdName" type="text" class="validate" value=" ">
-						<label for="txtEdName" style="text-align: left;">Nombre</label>
-				</div>
-        <div class="input-field margin-on-modal">
-						<input id="txtEdNit" type="text" class="validate" value=" ">
-						<label for="txtEdNit" style="text-align: left;">Nit</label>
-				</div>
-        <div class="input-field margin-on-modal">
-						<input id="txtEdTelefono" type="email" class="validate" value=" ">
-						<label for="txtEdTelefono" style="text-align: left;">Telefono</label>
-				</div>
-				<div class="input-field margin-on-modal">
-						<input id="txtEdDireccion" type="text" class="validate" value=" ">
-						<label for="txtEdDireccion" style="text-align: left;">Direccion</label>
-				</div>
-        <div class="switch  margin-on-modal">
-          <label>
-            Inactivo
-            <input type="checkbox" id="chbEdEstado">
-            <span class="lever"></span>
-            Activo
-          </label>
+        <div class="modal-footer">
+            <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnAgregar">Agregar</button>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
         </div>
-      </div>
-  </div>
-  <div class="modal-footer">
-    <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnModificar">Modificar</button>
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-  </div>
-</div>
+    </div>
 
-<!-- ELIMINAR Factura -->
-<div id="mdlEliminar" class="modal">
-  <div class="modal-content">
-      <div class="valign">
-        <h4>Eliminar Factura</h4>
-        <p>
-          Esta seguro de que desea eliminar la Factura?
-        </p>
-      </div>
-  </div>
-  <div class="modal-footer">
-    <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnEliminar">Eliminar</button>
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-  </div>
-</div>
+    <!-- EDITAR Factura -->
+    <div id="mdlEditar" class="modal">
+        <div class="modal-content">
+            <div class="valign">
+                <h4>Modificar Factura</h4>
+                <input type="hidden" id="txtEdAgregado" value="">
+                <div class="input-field margin-on-modal">
+                    <input id="txtEdName" type="text" class="validate" value=" ">
+                    <label for="txtEdName" style="text-align: left;">Nombre</label>
+                </div>
+                <div class="input-field margin-on-modal">
+                    <input id="txtEdNit" type="text" class="validate" value=" ">
+                    <label for="txtEdNit" style="text-align: left;">Nit</label>
+                </div>
+                <div class="input-field margin-on-modal">
+                    <input id="txtEdTelefono" type="email" class="validate" value=" ">
+                    <label for="txtEdTelefono" style="text-align: left;">Telefono</label>
+                </div>
+                <div class="input-field margin-on-modal">
+                    <input id="txtEdDireccion" type="text" class="validate" value=" ">
+                    <label for="txtEdDireccion" style="text-align: left;">Direccion</label>
+                </div>
+                <div class="switch  margin-on-modal">
+                    <label>
+                        Inactivo
+                        <input type="checkbox" id="chbEdEstado">
+                        <span class="lever"></span>
+                        Activo
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnModificar">Modificar</button>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+        </div>
+    </div>
 
-  <% include /partial/footer %>
-<script src="./js/facturas.js"></script>
+    <!-- ELIMINAR Factura -->
+    <div id="mdlEliminar" class="modal">
+        <div class="modal-content">
+            <div class="valign">
+                <h4>Eliminar Factura</h4>
+                <p>
+                    Esta seguro de que desea eliminar la Factura?
+                </p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-action modal-close waves-effect waves-green btn-flat" id="btnEliminar">Eliminar</button>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+        </div>
+    </div>
+
+    <% include /partial/footer %>
+    <script src="../js/facturas.js"></script>
 </body>
 </html>

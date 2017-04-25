@@ -42,7 +42,7 @@ var producto = {
         connection.query('DELETE FROM producto WHERE id=?;',id,
         function(error, resultado){
           if(error){
-            res.json({"msg":"Error al ELIMINAR"});
+            res.json({"msg":"No se pudo eliminar, ya que existe una referencia en una factura"});
           }else {
             if (typeof resultado == undefined || typeof resultado == 'undefined' ) { res.json({"msg":"No hay productos"}); }
             else{ res.json({"msg":"producto eliminado"}); }

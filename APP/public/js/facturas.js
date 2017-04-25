@@ -6,7 +6,7 @@ function descargar(id){
 window.open(appServer + 'generarfactura?facturaId='+id+'&print=FALSE');
 }
 
-function eliminar(id){
+function eliminarFac(id){
   $('#mdlEliminar').modal('open');
   $('#btnEliminar').click(function(){
 
@@ -30,7 +30,7 @@ function eliminar(id){
 function addRow(value){
   rol = window.localStorage.getItem('rol');
   if(rol == 'ADMIN' || rol == 'ADMINISTRATIVO'){
-    eliminar = '<button class="tooltipped btn-floating btn-flat" data-position="bottom" data-delay="50" data-tooltip="Eliminar" onclick="eliminar('+value.id+')"><i class="material-icons blue-grey-text">delete</i></button>';
+    eliminar = '<button class="tooltipped btn-floating btn-flat" data-position="bottom" data-delay="50" data-tooltip="Eliminar" onclick="eliminarFac('+value.id+')"><i class="material-icons blue-grey-text">delete</i></button>';
   } else {
     eliminar = '';
   }

@@ -16,6 +16,64 @@ function agregarProductoTabla(value){
   row = '';
 }
 
+function agregar(){
+  if (typeof listaProductos[0] == 'undefined' && listaProductos[0] == null) {
+    alert('deber agregar productos a la factura para continuar');
+    return;
+  }
+  if($('#txtIdCliente').val() == "" || $('#txtIdCliente').val()=='undefined'){
+    alert('debe seleccionar un usuario para continuar');
+    return;
+  }
+  var fact = {
+    fecha: getCurrentDate(),
+    cliente: $('#txtIdCliente').val(),
+    vendedor: window.localStorage.getItem('vendedorId'),
+    estado: 5,
+    total: $('#tdTotal').text()
+  }
+  var facturaID = 0;
+  console.log(fact);
+  $.ajax({
+    url: uri.factura,
+    headers: {"x-access-token": window.localStorage.getItem('token')},
+    type: 'POST',
+    data: fact,
+    success: function(data){
+      Materialize.toast(data.msg, 3000, 'rounded', function(){});
+      console.log(data.insertId);
+      ///////////
+      var itemsProcessed = 0;
+      listaProductos.forEach(function(element, index, array){
+        var registro = {prod: element.id, fact:data.insertId, cant:element.cant};
+        $.ajax({
+          url: uri.prodfact,
+          headers: {"x-access-token": window.localStorage.getItem('token')},
+          type: 'POST',
+          data: registro,
+          success: function(result){
+            itemsProcessed++;
+            if(itemsProcessed === array.length) {
+              $('.print').show();
+                $('.hide-print').hide();
+                window.print();
+                $('.print').hide();
+                $('.hide-print').show();
+                window.location = '/';
+            }
+          }, error: function(){
+            alert('error en peticion');
+          }
+        });
+      });
+      //////////////
+    },
+    error: function(){
+      alert('error en peticion');
+    }
+  });
+}
+
 function actualizarTabla(){
   $('#tblFactura tr').remove();
 
@@ -85,11 +143,7 @@ $(document).ready(function(){
 
 
   $('#btnImprimir').click(function(){
-    $('.print').show();
-    $('.hide-print').hide();
-    window.print();
-    $('.print').hide();
-    $('.hide-print').show();
+    agregar();
   });
 
   //////////////////////////////////////////////////////////////////
