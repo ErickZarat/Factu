@@ -57,7 +57,7 @@ function seleccionarUsuario(id){
 }
 
 function addProductoRow(value){
-  row = '<tr><td id="tdImg-'+value.id+'" class="hide">'+value.img+'</td>'
+  row = '<tr><input type="hidden" id="tdImg-'+value.id+'" value="'+value.img+'">'
   +'<td id="tdCod-'+value.id+'">'+value.cod+'</td>'
   +'<td id="tdProd-'+value.id+'">'+value.producto+'</td>'
   +'<td><input type="text" id="txtCant-'+value.id+'" value="1" style="width: 60%;"></td>'
@@ -188,6 +188,7 @@ $(document).ready(function(){
       $.each(data, function(i, value){
         addProductoRow(value);
       });
+      console.log(data)
     },
     type: 'GET'
   });
