@@ -40,7 +40,7 @@ function agregar(){
     type: 'POST',
     data: fact,
     success: function(data){
-      Materialize.toast(data.msg, 3000, 'rounded', function(){});
+
       console.log(data.insertId);
       ///////////
       var itemsProcessed = 0;
@@ -54,12 +54,14 @@ function agregar(){
           success: function(result){
             itemsProcessed++;
             if(itemsProcessed === array.length) {
-              $('.print').show();
-                $('.hide-print').hide();
-                window.print();
-                $('.print').hide();
-                $('.hide-print').show();
-                window.location = '/';
+                Materialize.toast(data.msg, 1000, 'rounded', function(){
+                    $('.print').show();
+                      $('.hide-print').hide();
+                      window.print();
+                      $('.print').hide();
+                      $('.hide-print').show();
+                      window.location = '/';
+                });
             }
           }, error: function(){
             alert('error en peticion');
