@@ -19,7 +19,6 @@ function createPDF() {
     });
    doc.addImage(img, 'JPEG', 0, 0);
    doc.save("fac-"+ getUrlParameter('facturaId') + ".pdf");
-   //form.width(cache_width);
   });
 
  }
@@ -34,7 +33,7 @@ function createPDF() {
  }
 
 function agregarProductoTabla(value, precioT){
-  var row = '<tr><td class="padd-5">'+value.cant+'</td><td class="padd-5">'+value.producto+'</td><td class="padd-5">'+value.precio.toFixed(2)+'</td><td class="padd-5">'+precioT.toFixed(2)+'</td></tr>'
+  var row = '<tr><td><img src="../uploads/productos/'+value.img+'" class="img-prd" class="left"/></td><td class="padd-5">'+value.cant+'</td><td class="padd-5">'+value.producto+'</td><td class="padd-5">'+value.precio.toFixed(2)+'</td><td class="padd-5">'+precioT.toFixed(2)+'</td></tr>'
   $('#tblDescripcion').append(row);
   row = '';
 }
@@ -42,19 +41,15 @@ function agregarProductoTabla(value, precioT){
 function actualizarTabla(data){
   $('#tblDescripcion tr').remove();
 
-  var subtotal = 0;
+  var total = 0;
   var rows = '';
   $.each(data, function(i, value){
     precioT = value.precio * value.cant;
     agregarProductoTabla(value, precioT);
 
-    subtotal += precioT;
+    total += precioT;
   });
-  var iva = (JSON.parse(window.localStorage.getItem('config')).iva / 100) * subtotal;
-  var total = subtotal + iva;
-  var rowsTotal = '<tr><td/><td/><td/><td class="padd-5"><strong>SubTotal Q</strong></td><td class="padd-5">'+subtotal.toFixed(2)+'</td></tr>'
-  +'<tr><td/><td/><td/><td class="padd-5"><strong>IVA(12)% Q</strong></td><td class="padd-5">'+iva.toFixed(2)+'</td></tr>'
-  +'<tr><td/><td/><td/><td class="padd-5"><strong>TOTAL Q</strong></td><td id="tdTotal">'+total.toFixed(2)+'</td></tr>'
+  var rowsTotal = '<tr><td/><td/><td/><td class="padd-5"><strong>TOTAL Q</strong></td><td id="tdTotal">'+total.toFixed(2)+'</td></tr>'
   $('#tblDescripcion').append(rowsTotal);
 }
 
@@ -102,7 +97,16 @@ $(document).ready(function(){
       $('#tblCliente').append(data.nombreCliente);
       $('#tblVendedor').append(data.nombreVendedor);
       $('#tblFecha').append(formatDate(data.fecha));
-      $('#txtNumFac').text('Factura #' + data.id);
+      var nomEstado = '';
+      console.log('estado: '+ data.idEstado)
+      if(data.idEstado == 5){
+          nomEstado = 'Cotizacion';
+          $('#txtNota').append('<strong>NOTA: </strong>La cotización tiene una válidez de 15 días a partir de la fecha descrita en este documento.<br>La forma de pago es del 50% de anticipo y 50% contraentrega.<br>Los precios incluyen IVA.');
+      } else {
+          nomEstado = 'Factura';
+          $('#txtNota').append('<strong>!Gracias por su compra!</strong>');
+      }
+      $('#txtNumFac').text(nomEstado+' #' + data.id);
       $.ajax({
         url: uri.prodfact + '/' + getUrlParameter('facturaId'),
         type: 'GET',
@@ -113,12 +117,10 @@ $(document).ready(function(){
           if(getUrlParameter('print') !== 'TRUE'){
             $('body').scrollTop(0);
             createPDF();
-            window.setTimeout(function(){
-              //self.close();
-            }, 2000);
+            setTimeout(function(){ self.close() }, 2500);
           } else {
             window.print();
-            //self.close();
+            self.close();
           }
 
         }, error: function(){

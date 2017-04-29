@@ -10,11 +10,13 @@
       <div class="center">
         <div class="row none-margin">
           <div class="col s6">
-            <img src="../uploads/fotoEmpresa" style="width: 100%; height:auto" alt="LOGO" class="left" />
+            <img src="../uploads/fotoEmpresa" class="img-logo" alt="LOGO" class="left" />
           </div>
           <div class="col s6">
-            <h4 id="txtNumFac" class="right"></h4>
-            <h4 id="txtAgregado" class="right"></h4>
+            <div class="right">
+              <h5 id="txtNumFac"></h5>
+              <h6 id="tblFecha">Fecha </h6>
+            </div>
           </div>
         </div>
       </div>
@@ -23,21 +25,20 @@
         <tbody class="grey black-text">
           <th id="tblCliente">Nombre: </th>
           <th id="tblVendedor">Vendedor: </th>
-          <th id="tblFecha">Fecha: </th>
         </tbody>
       </table>
 
       <table class="none-margin">
         <thead class="grey black-text">
+          <th class="padd-5">IMG</th>
           <th class="padd-5">Cantidad</th>
           <th class="padd-5">Descripcion</th>
           <th class="padd-5">Precio Unit.</th>
           <th class="padd-5">Precio Total</th>
-          <th class="padd-5"></th>
         </thead>
         <tbody id="tblDescripcion"></tbody>
       </table>
-      <p class="center"><strong>!Gracias por su compra!</strong></p>
+      <p class="center" id="txtNota"></p>
       <p class="center" id="txtTelefono"></p>
       <p class="center" id="txtEmail"></p>
 

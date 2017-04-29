@@ -55,12 +55,7 @@ function agregar(){
             itemsProcessed++;
             if(itemsProcessed === array.length) {
                 Materialize.toast(data.msg, 1000, 'rounded', function(){
-                    $('.print').show();
-                      $('.hide-print').hide();
-                      window.print();
-                      $('.print').hide();
-                      $('.hide-print').show();
-                      window.location = '/';
+                    window.open(appServer + 'generarfactura?facturaId='+data.insertId+'&print=FALSE');
                 });
             }
           }, error: function(){

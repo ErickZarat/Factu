@@ -75,6 +75,16 @@ table thead{
 
 }
 
+.img-prd{
+    width: 100px;
+    height: auto;
+}
+
+.img-logo{
+    width: 100%;
+    height: auto;
+}
+
 .line-sep{
     border-bottom: thick dotted black;
     margin-bottom: 25px;
