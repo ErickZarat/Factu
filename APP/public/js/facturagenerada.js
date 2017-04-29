@@ -7,7 +7,7 @@ var uri = {
 var
  form = $('body'),
  cache_width = form.width(),
- a4 = [595.28, 841.89];
+ a4 = [600,800];
 
 function createPDF() {
   getCanvas().then(function(canvas) {
@@ -19,7 +19,7 @@ function createPDF() {
     });
    doc.addImage(img, 'JPEG', 0, 0);
    doc.save("fac-"+ getUrlParameter('facturaId') + ".pdf");
-   form.width(cache_width);
+   //form.width(cache_width);
   });
 
  }
@@ -34,7 +34,7 @@ function createPDF() {
  }
 
 function agregarProductoTabla(value, precioT){
-  var row = '<tr><td>'+value.cant+'</td><td>'+value.producto+'</td><td>'+value.precio.toFixed(2)+'</td><td>'+precioT.toFixed(2)+'</td></tr>'
+  var row = '<tr><td class="padd-5">'+value.cant+'</td><td class="padd-5">'+value.producto+'</td><td class="padd-5">'+value.precio.toFixed(2)+'</td><td class="padd-5">'+precioT.toFixed(2)+'</td></tr>'
   $('#tblDescripcion').append(row);
   row = '';
 }
@@ -52,9 +52,9 @@ function actualizarTabla(data){
   });
   var iva = (JSON.parse(window.localStorage.getItem('config')).iva / 100) * subtotal;
   var total = subtotal + iva;
-  var rowsTotal = '<tr><td/><td/><td/><td><strong>SubTotal Q</strong></td><td>'+subtotal.toFixed(2)+'</td></tr>'
-  +'<tr><td/><td/><td/><td><strong>IVA(12)% Q</strong></td><td>'+iva.toFixed(2)+'</td></tr>'
-  +'<tr><td/><td/><td/><td><strong>TOTAL Q</strong></td><td id="tdTotal">'+total.toFixed(2)+'</td></tr>'
+  var rowsTotal = '<tr><td/><td/><td/><td class="padd-5"><strong>SubTotal Q</strong></td><td class="padd-5">'+subtotal.toFixed(2)+'</td></tr>'
+  +'<tr><td/><td/><td/><td class="padd-5"><strong>IVA(12)% Q</strong></td><td class="padd-5">'+iva.toFixed(2)+'</td></tr>'
+  +'<tr><td/><td/><td/><td class="padd-5"><strong>TOTAL Q</strong></td><td id="tdTotal">'+total.toFixed(2)+'</td></tr>'
   $('#tblDescripcion').append(rowsTotal);
 }
 
@@ -88,7 +88,7 @@ $(document).ready(function(){
       $('#txtEmpresa').text(data.nombre);
       $('#txtLocalizacion').text(data.direccion + ', ' + data.ciudad + ' ' + data.region );
       $('#txtTelefono').text("Telefono: " + data.telefono);
-      $('#txtEmail').text('Email'+data.email);
+      $('#txtEmail').text('Email: '+data.email);
     }, error: function(){
       alert('error en peticion');
     }
@@ -99,8 +99,9 @@ $(document).ready(function(){
     type: 'GET',
     headers: {"x-access-token": window.localStorage.getItem('token')},
     success: function(data){
-      $('#tblCliente').append('<tr><td>'+data.nombreCliente+'</td></tr>');
-      $('#tblVendedor').append('<tr><td>'+data.nombreVendedor+'</td><td>'+formatDate(data.fecha)+'</td></tr>');
+      $('#tblCliente').append(data.nombreCliente);
+      $('#tblVendedor').append(data.nombreVendedor);
+      $('#tblFecha').append(formatDate(data.fecha));
       $('#txtNumFac').text('Factura #' + data.id);
       $.ajax({
         url: uri.prodfact + '/' + getUrlParameter('facturaId'),
@@ -113,11 +114,11 @@ $(document).ready(function(){
             $('body').scrollTop(0);
             createPDF();
             window.setTimeout(function(){
-              self.close();
+              //self.close();
             }, 2000);
           } else {
             window.print();
-            self.close();
+            //self.close();
           }
 
         }, error: function(){

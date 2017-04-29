@@ -1,0 +1,100 @@
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, td {
+    border: 1px solid black;
+}
+
+table, th{
+    border: 1px solid white;
+}
+
+table thead{
+    text-align: left;
+    color: white;
+    background-color: black;
+}
+
+.center{
+    text-align: center;
+}
+
+.border{
+    text-align: center;
+    border-style: solid;
+    border-color: #000000;
+    border-width: thin;
+}
+
+.border-ruta{
+    border-style: solid;
+    border-color: #000000;
+    border-width: thin;
+}
+
+.titleBus{
+    background-color: #000000;
+    color: #ffffff;
+    width: 100%;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.hide{
+    display: none;
+}
+
+.padd-firma{
+    padding-top: 3%;
+}
+
+.line{
+    border-left: transparent;
+    border-top: transparent;
+    border-right: transparent;
+    border-style: solid;
+    border-bottom-color: black;
+}
+
+.line-data{
+    border-left: transparent;
+    border-top: transparent;
+    border-right: transparent;
+    border-style: solid;
+    border-bottom-color: black;
+    width: 80%;
+}
+
+.padd-5{
+        padding-top:5px !important;
+        padding-bottom:5px !important;
+
+}
+
+.line-sep{
+    border-bottom: thick dotted black;
+    margin-bottom: 25px;
+}
+
+.none-margin{
+    margin-top: 2%;
+    margin-left: 1%;
+    width: 99%;
+    text-align: left;
+}
+
+.circle {
+    border-style: solid;
+    border-color: #000000;
+    border-width: medium;
+    width: 15px;
+    height: 15px;
+    -webkit-border-radius: 7.5px;
+    -moz-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background: white;
+}

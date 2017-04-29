@@ -2,63 +2,44 @@
 <html>
 <head>
   <title>Reporte Factura</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+<link rel="stylesheet" href="../css/reporte.css" media="screen" title="no title">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 </head>
-<body>
-  <div class="container" id="divPrint">
-    <div class="container-flud">
-
+<body class="none-margin">
+  <div class="none-margin" id="divPrint">
       <div class="center">
-        <div class="row">
-          <div class="col s4">
-            <img src="../uploads/fotoEmpresa" style="width: 100%; height:100%" alt="LOGO" class="left" />
+        <div class="row none-margin">
+          <div class="col s6">
+            <img src="../uploads/fotoEmpresa" style="width: 100%; height:auto" alt="LOGO" class="left" />
           </div>
-          <div class="col s4">
-            <h5 id="txtEmpresa"></h5>
-            <p id="txtLocalizacion"></p>
-            <p id="txtTelefono"></p>
-            <p id="txtEmail"></p>
-          </div>
-          <div class="col s4">
+          <div class="col s6">
             <h4 id="txtNumFac" class="right"></h4>
+            <h4 id="txtAgregado" class="right"></h4>
           </div>
         </div>
-
-
       </div>
 
-
-      <table>
-        <thead class="black white-text">
-          <th>Facturar A</th>
-        </thead>
-        <tbody id="tblCliente">
-
+      <table class="none-margin">
+        <tbody class="grey black-text">
+          <th id="tblCliente">Nombre: </th>
+          <th id="tblVendedor">Vendedor: </th>
+          <th id="tblFecha">Fecha: </th>
         </tbody>
       </table>
 
-      <table>
-        <thead class="black white-text">
-          <th>Vendedor</th>
-          <th>Fecha</th>
-          <th>Forma de Pago</th>
-        </thead>
-        <tbody id="tblVendedor"></tbody>
-      </table>
-
-      <table class="striped">
-        <thead class="black white-text">
-          <th>Cantidad</th>
-          <th>Descripcion</th>
-          <th>Precio Unit.</th>
-          <th>Precio Total</th>
-          <th></th>
+      <table class="none-margin">
+        <thead class="grey black-text">
+          <th class="padd-5">Cantidad</th>
+          <th class="padd-5">Descripcion</th>
+          <th class="padd-5">Precio Unit.</th>
+          <th class="padd-5">Precio Total</th>
+          <th class="padd-5"></th>
         </thead>
         <tbody id="tblDescripcion"></tbody>
       </table>
-
       <p class="center"><strong>!Gracias por su compra!</strong></p>
-    </div>
+      <p class="center" id="txtTelefono"></p>
+      <p class="center" id="txtEmail"></p>
 
   </div>
 
